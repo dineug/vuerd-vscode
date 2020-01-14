@@ -2,6 +2,8 @@
 
 > [vuerd-plugin-erd](https://github.com/vuerd/vuerd-plugin-erd) ERD Editor vscode extension
 
+![vuerd](./img/vuerd.gif)
+
 ## Usage
 
 1. Creating an ERD data file \*.vuerd.json
