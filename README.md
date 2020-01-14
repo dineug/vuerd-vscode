@@ -5,8 +5,8 @@
 ## Usage
 
 1. Creating an ERD data file \*.vuerd.json
-1. ![Image](./img/vuerd.vscode-1.png)
-1. ![Image](./img/vuerd.vscode-2.png)
+1. ![Image](./img/vuerd-vscode-1.png)
+1. ![Image](./img/vuerd-vscode-2.png)
 
 ## License
 
