@@ -1,0 +1,80 @@
+{
+  "canvas": {
+    "width": 2000,
+    "height": 2000,
+    "scrollTop": 0,
+    "scrollLeft": 0,
+    "show": {
+      "tableComment": true,
+      "columnComment": true,
+      "columnDataType": true,
+      "columnDefault": true,
+      "columnAutoIncrement": true,
+      "columnPrimaryKey": true,
+      "columnUnique": true,
+      "columnNotNull": true,
+      "relationship": true
+    },
+    "database": "MySQL",
+    "databaseName": "",
+    "canvasType": "ERD"
+  },
+  "table": {
+    "tables": [
+      {
+        "name": "",
+        "comment": "",
+        "columns": [],
+        "id": "52430530-eb4a-4d35-b965-f8bffde8310f",
+        "ui": {
+          "active": false,
+          "top": 100,
+          "left": 200,
+          "widthName": 60,
+          "widthComment": 60,
+          "zIndex": 2
+        }
+      },
+      {
+        "name": "",
+        "comment": "",
+        "columns": [],
+        "id": "ad30d693-084b-4e7f-97c0-23c38c2502cf",
+        "ui": {
+          "active": true,
+          "top": 150,
+          "left": 250,
+          "widthName": 60,
+          "widthComment": 60,
+          "zIndex": 3
+        }
+      }
+    ],
+    "tableFocus": {
+      "focusName": true,
+      "focusComment": false,
+      "focusColumns": [],
+      "currentFocusTable": true,
+      "currentColumn": null,
+      "table": {
+        "name": "",
+        "comment": "",
+        "columns": [],
+        "id": "ad30d693-084b-4e7f-97c0-23c38c2502cf",
+        "ui": {
+          "active": true,
+          "top": 150,
+          "left": 250,
+          "widthName": 60,
+          "widthComment": 60,
+          "zIndex": 3
+        }
+      }
+    },
+    "edit": null,
+    "copyColumns": [],
+    "columnDraggable": null
+  },
+  "memo": { "memos": [] },
+  "relationship": { "relationships": [], "draw": null }
+}

@@ -1,0 +1,104 @@
+{
+  "name": "vuerd-vscode",
+  "displayName": "ERD Editor",
+  "description": "ERD Editor vscode extension",
+  "version": "0.1.0",
+  "icon": "img/vuerd.png",
+  "publisher": "dineug",
+  "homepage": "https://github.com/vuerd/vuerd-vscode",
+  "bugs": {
+    "url": "https://github.com/vuerd/vuerd-vscode/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vuerd/vuerd-vscode.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.38.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "vuerd",
+    "ERD",
+    "Editor",
+    "vscode"
+  ],
+  "activationEvents": [
+    "onCommand:vuerd.open",
+    "onWebviewPanel:vuerd"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "vuerd",
+        "extensions": [
+          ".vuerd.json"
+        ],
+        "aliases": [
+          "vuerd"
+        ]
+      }
+    ],
+    "commands": [
+      {
+        "command": "vuerd.open",
+        "title": "ERD Editor Open",
+        "category": "vuerd",
+        "icon": {
+          "light": "./img/vuerd.png",
+          "dark": "./img/vuerd.png"
+        }
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "vuerd.open",
+          "when": "resourceLangId == vuerd",
+          "group": "navigation"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "vuerd.open",
+          "when": "editorLangId == vuerd",
+          "group": "navigation"
+        }
+      ],
+      "editor/title/context": [
+        {
+          "command": "vuerd.open",
+          "when": "resourceLangId == vuerd",
+          "group": "navigation"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "vuerd.open",
+          "when": "editorLangId == vuerd",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -w -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^10.5.2",
+    "@types/vscode": "^1.38.0",
+    "@typescript-eslint/eslint-plugin": "^2.15.0",
+    "@typescript-eslint/parser": "^2.15.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^1.19.1",
+    "typescript": "^3.5.1"
+  }
+}
