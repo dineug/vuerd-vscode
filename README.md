@@ -10,6 +10,30 @@
 1. ![Image](./img/vuerd-vscode-1.png)
 1. ![Image](./img/vuerd-vscode-2.png)
 
+## Editor Action
+
+| Name                            | Action                                                   |
+| ------------------------------- | -------------------------------------------------------- |
+| Multiple selection(table, memo) | Ctrl + Drag, Ctrl + Click, Ctrl + A                      |
+| Multi-movement(table, memo)     | Ctrl + Drag                                              |
+| Column shift                    | Drag                                                     |
+| Multiple selection(column)      | Ctrl + Click, Shift + Click, Shift + Arrow key(up, down) |
+| Copy&Paste(column)              | Ctrl + C, Ctrl + V                                       |
+| Contextmenu                     | Right-click                                              |
+| New Table                       | Alt + N                                                  |
+| New Memo                        | Alt + M                                                  |
+| New Column                      | Alt + Enter                                              |
+| Delete(table, memo)             | Ctrl + Delete                                            |
+| Delete(column)                  | Alt + Delete                                             |
+| Select DataType Hint            | Arrow key(right), Click                                  |
+| Move Data Type Hint             | Arrow key(up, down)                                      |
+| Relationship ZeroOne            | Alt + 1                                                  |
+| Relationship ZeroOneN           | Alt + 2                                                  |
+| Primary Key                     | Alt + K                                                  |
+| Undo                            | Ctrl + Z                                                 |
+| Redo                            | Ctrl + Shift + Z                                         |
+| Editing                         | Enter, dblclick                                          |
+
 ## License
 
 [MIT](https://github.com/vuerd/vuerd-vscode/blob/master/LICENSE)
