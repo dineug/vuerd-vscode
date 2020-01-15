@@ -8,12 +8,6 @@
   window.addEventListener("message", event => {
     const message = event.data;
     switch (message.command) {
-      case "destroyed":
-        if (app !== null) {
-          app.$destroy();
-          window.removeEventListener("message");
-        }
-        break;
       case "value":
         if (app !== null) {
           app.$data.value = message.value;

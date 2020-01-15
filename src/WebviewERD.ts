@@ -37,7 +37,13 @@ export default class WebviewERD {
     );
 
     this.panel.webview.html = this.setupHtml();
-    this.panel.onDidDispose(() => this.dispose(), null, this.disposables);
+    this.panel.onDidDispose(
+      () => {
+        this.dispose();
+      },
+      null,
+      this.disposables
+    );
     this.panel.webview.onDidReceiveMessage(
       message => {
         switch (message.command) {
@@ -47,7 +53,7 @@ export default class WebviewERD {
                 vscode.window.showErrorMessage(err.message);
               }
             });
-            break;
+            return;
           case "getValue":
             try {
               const value = fs.readFileSync(this.uri.fsPath, "utf-8");
@@ -58,7 +64,7 @@ export default class WebviewERD {
             } catch (err) {
               vscode.window.showErrorMessage(err.message);
             }
-            break;
+            return;
         }
       },
       null,
@@ -67,11 +73,14 @@ export default class WebviewERD {
   }
 
   public dispose() {
-    this.panel.webview.postMessage({
-      command: "destroyed"
-    });
     this.webviewManager.remove(this);
     this.panel.dispose();
+    while (this.disposables.length) {
+      const item = this.disposables.pop();
+      if (item) {
+        item.dispose();
+      }
+    }
   }
 
   private setupHtml() {

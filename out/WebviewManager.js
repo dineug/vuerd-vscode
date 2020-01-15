@@ -6,13 +6,15 @@ class WebviewManager {
         this.erdList = [];
     }
     add(context, uri) {
-        const erd = this.find(uri);
+        let erd = this.find(uri);
         if (erd === null) {
-            this.erdList.push(new WebviewERD_1.default(context, uri, this));
+            erd = new WebviewERD_1.default(context, uri, this);
+            this.erdList.push(erd);
         }
         else {
             erd.panel.reveal();
         }
+        return erd;
     }
     remove(erd) {
         const index = this.erdList.indexOf(erd);

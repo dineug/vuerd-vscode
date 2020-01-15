@@ -20,7 +20,9 @@ class WebviewERD {
             ]
         });
         this.panel.webview.html = this.setupHtml();
-        this.panel.onDidDispose(() => this.dispose(), null, this.disposables);
+        this.panel.onDidDispose(() => {
+            this.dispose();
+        }, null, this.disposables);
         this.panel.webview.onDidReceiveMessage(message => {
             switch (message.command) {
                 case "value":
@@ -29,7 +31,7 @@ class WebviewERD {
                             vscode.window.showErrorMessage(err.message);
                         }
                     });
-                    break;
+                    return;
                 case "getValue":
                     try {
                         const value = fs.readFileSync(this.uri.fsPath, "utf-8");
@@ -41,16 +43,19 @@ class WebviewERD {
                     catch (err) {
                         vscode.window.showErrorMessage(err.message);
                     }
-                    break;
+                    return;
             }
         }, null, this.disposables);
     }
     dispose() {
-        this.panel.webview.postMessage({
-            command: "destroyed"
-        });
         this.webviewManager.remove(this);
         this.panel.dispose();
+        while (this.disposables.length) {
+            const item = this.disposables.pop();
+            if (item) {
+                item.dispose();
+            }
+        }
     }
     setupHtml() {
         const pathVue = vscode.Uri.file(path.join(this.extensionPath, "static", "vue.min.js"));

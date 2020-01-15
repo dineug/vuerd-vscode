@@ -5,10 +5,11 @@ const WebviewManager_1 = require("./WebviewManager");
 function activate(context) {
     context.subscriptions.push(vscode.commands.registerCommand("vuerd.open", (uri) => {
         if (uri instanceof vscode.Uri) {
-            WebviewManager_1.webviewManager.add(context, uri);
+            return WebviewManager_1.webviewManager.add(context, uri);
         }
         else {
             vscode.window.showInformationMessage("Open a vuerd.json file first to show");
+            return;
         }
     }));
 }

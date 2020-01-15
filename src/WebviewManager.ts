@@ -2,15 +2,21 @@ import * as vscode from "vscode";
 import WebviewERD from "./WebviewERD";
 
 class WebviewManager {
-  private erdList: WebviewERD[] = [];
+  private erdList: WebviewERD[];
 
-  public add(context: vscode.ExtensionContext, uri: vscode.Uri) {
-    const erd = this.find(uri);
+  constructor() {
+    this.erdList = [];
+  }
+
+  public add(context: vscode.ExtensionContext, uri: vscode.Uri): WebviewERD {
+    let erd = this.find(uri);
     if (erd === null) {
-      this.erdList.push(new WebviewERD(context, uri, this));
+      erd = new WebviewERD(context, uri, this);
+      this.erdList.push(erd);
     } else {
       erd.panel.reveal();
     }
+    return erd;
   }
 
   public remove(erd: WebviewERD) {
