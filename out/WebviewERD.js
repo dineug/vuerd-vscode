@@ -3,13 +3,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const path = require("path");
 const fs = require("fs");
 const vscode = require("vscode");
+const rxjs_1 = require("rxjs");
+const operators_1 = require("rxjs/operators");
 const viewType = "vuerd";
 class WebviewERD {
     constructor(context, uri, webviewManager) {
         this.disposables = [];
+        this.value$ = new rxjs_1.Subject();
         this.uri = uri;
         this.webviewManager = webviewManager;
         this.extensionPath = context.extensionPath;
+        this.subValue = this.value$
+            .pipe(operators_1.debounceTime(300))
+            .subscribe((value) => {
+            fs.writeFile(this.uri.fsPath, value, err => {
+                if (err) {
+                    vscode.window.showErrorMessage(err.message);
+                }
+            });
+        });
         const column = vscode.window.activeTextEditor
             ? vscode.window.activeTextEditor.viewColumn
             : undefined;
@@ -20,17 +32,11 @@ class WebviewERD {
             ]
         });
         this.panel.webview.html = this.setupHtml();
-        this.panel.onDidDispose(() => {
-            this.dispose();
-        }, null, this.disposables);
+        this.panel.onDidDispose(() => this.dispose(), null, this.disposables);
         this.panel.webview.onDidReceiveMessage(message => {
             switch (message.command) {
                 case "value":
-                    fs.writeFile(this.uri.fsPath, message.value, err => {
-                        if (err) {
-                            vscode.window.showErrorMessage(err.message);
-                        }
-                    });
+                    this.value$.next(message.value);
                     return;
                 case "getValue":
                     try {
@@ -56,6 +62,7 @@ class WebviewERD {
                 item.dispose();
             }
         }
+        this.subValue.unsubscribe();
     }
     setupHtml() {
         const pathVue = vscode.Uri.file(path.join(this.extensionPath, "static", "vue.min.js"));

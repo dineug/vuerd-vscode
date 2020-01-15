@@ -64,23 +64,28 @@
           this.undoManager.add({
             undo: () => {
               this.value = oldValue;
+              this.onPostMessage(oldValue);
             },
             redo: () => {
               this.value = value;
+              this.onPostMessage(value);
             }
           });
         }
         this.value = value;
-        vscode.postMessage({
-          command: "value",
-          value
-        });
+        this.onPostMessage(value);
       },
       onUndo() {
         this.undoManager.undo();
       },
       onRedo() {
         this.undoManager.redo();
+      },
+      onPostMessage(value) {
+        vscode.postMessage({
+          command: "value",
+          value
+        });
       },
       callback() {
         this.undo = this.undoManager.hasUndo();

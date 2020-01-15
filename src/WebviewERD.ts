@@ -2,6 +2,8 @@ import * as path from "path";
 import * as fs from "fs";
 import * as vscode from "vscode";
 import WebviewManager from "./WebviewManager";
+import { Subscription, Subject } from "rxjs";
+import { debounceTime } from "rxjs/operators";
 
 const viewType = "vuerd";
 
@@ -9,6 +11,8 @@ export default class WebviewERD {
   private extensionPath: string;
   private disposables: vscode.Disposable[] = [];
   private webviewManager: WebviewManager;
+  private value$: Subject<string> = new Subject();
+  private subValue: Subscription;
 
   public panel: vscode.WebviewPanel;
   public uri: vscode.Uri;
@@ -21,6 +25,16 @@ export default class WebviewERD {
     this.uri = uri;
     this.webviewManager = webviewManager;
     this.extensionPath = context.extensionPath;
+    this.subValue = this.value$
+      .pipe(debounceTime(300))
+      .subscribe((value: string) => {
+        fs.writeFile(this.uri.fsPath, value, err => {
+          if (err) {
+            vscode.window.showErrorMessage(err.message);
+          }
+        });
+      });
+
     const column = vscode.window.activeTextEditor
       ? vscode.window.activeTextEditor.viewColumn
       : undefined;
@@ -37,22 +51,12 @@ export default class WebviewERD {
     );
 
     this.panel.webview.html = this.setupHtml();
-    this.panel.onDidDispose(
-      () => {
-        this.dispose();
-      },
-      null,
-      this.disposables
-    );
+    this.panel.onDidDispose(() => this.dispose(), null, this.disposables);
     this.panel.webview.onDidReceiveMessage(
       message => {
         switch (message.command) {
           case "value":
-            fs.writeFile(this.uri.fsPath, message.value, err => {
-              if (err) {
-                vscode.window.showErrorMessage(err.message);
-              }
-            });
+            this.value$.next(message.value);
             return;
           case "getValue":
             try {
@@ -81,6 +85,7 @@ export default class WebviewERD {
         item.dispose();
       }
     }
+    this.subValue.unsubscribe();
   }
 
   private setupHtml() {
