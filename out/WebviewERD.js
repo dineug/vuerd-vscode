@@ -7,7 +7,7 @@ const rxjs_1 = require("rxjs");
 const operators_1 = require("rxjs/operators");
 const viewType = "vuerd";
 class WebviewERD {
-    constructor(context, uri, webviewManager) {
+    constructor(context, uri, webviewManager, webviewPanel) {
         this.disposables = [];
         this.value$ = new rxjs_1.Subject();
         this.uri = uri;
@@ -22,17 +22,22 @@ class WebviewERD {
                 }
             });
         });
-        const column = vscode.window.activeTextEditor
-            ? vscode.window.activeTextEditor.viewColumn
-            : undefined;
-        this.panel = vscode.window.createWebviewPanel(viewType, path.basename(uri.fsPath), column || vscode.ViewColumn.One, {
-            enableScripts: true,
-            localResourceRoots: [
-                vscode.Uri.file(path.join(context.extensionPath, "static"))
-            ]
-        });
-        this.panel.webview.html = this.setupHtml();
+        if (webviewPanel) {
+            this.panel = webviewPanel;
+        }
+        else {
+            const column = vscode.window.activeTextEditor
+                ? vscode.window.activeTextEditor.viewColumn
+                : undefined;
+            this.panel = vscode.window.createWebviewPanel(viewType, path.basename(uri.fsPath), column || vscode.ViewColumn.One, {
+                enableScripts: true,
+                localResourceRoots: [
+                    vscode.Uri.file(path.join(context.extensionPath, "static"))
+                ]
+            });
+        }
         this.panel.onDidDispose(() => this.dispose(), null, this.disposables);
+        this.panel.webview.html = this.setupHtml();
         this.panel.webview.onDidReceiveMessage(message => {
             switch (message.command) {
                 case "value":
@@ -44,6 +49,10 @@ class WebviewERD {
                         this.panel.webview.postMessage({
                             command: "value",
                             value
+                        });
+                        this.panel.webview.postMessage({
+                            command: "state",
+                            uri: this.uri
                         });
                     }
                     catch (err) {

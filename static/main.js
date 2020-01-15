@@ -13,6 +13,9 @@
           app.$data.value = message.value;
         }
         break;
+      case "state":
+        vscode.setState({ uri: message.uri });
+        break;
     }
   });
 

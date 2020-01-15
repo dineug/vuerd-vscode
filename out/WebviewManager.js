@@ -16,6 +16,9 @@ class WebviewManager {
         }
         return erd;
     }
+    revive(context, uri, webviewPanel) {
+        this.erdList.push(new WebviewERD_1.default(context, uri, this, webviewPanel));
+    }
     remove(erd) {
         const index = this.erdList.indexOf(erd);
         if (index >= 0) {

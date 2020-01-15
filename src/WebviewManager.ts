@@ -19,6 +19,14 @@ class WebviewManager {
     return erd;
   }
 
+  public revive(
+    context: vscode.ExtensionContext,
+    uri: vscode.Uri,
+    webviewPanel: vscode.WebviewPanel
+  ) {
+    this.erdList.push(new WebviewERD(context, uri, this, webviewPanel));
+  }
+
   public remove(erd: WebviewERD) {
     const index = this.erdList.indexOf(erd);
     if (index >= 0) {

@@ -20,7 +20,8 @@ export default class WebviewERD {
   constructor(
     context: vscode.ExtensionContext,
     uri: vscode.Uri,
-    webviewManager: WebviewManager
+    webviewManager: WebviewManager,
+    webviewPanel?: vscode.WebviewPanel
   ) {
     this.uri = uri;
     this.webviewManager = webviewManager;
@@ -35,23 +36,27 @@ export default class WebviewERD {
         });
       });
 
-    const column = vscode.window.activeTextEditor
-      ? vscode.window.activeTextEditor.viewColumn
-      : undefined;
-    this.panel = vscode.window.createWebviewPanel(
-      viewType,
-      path.basename(uri.fsPath),
-      column || vscode.ViewColumn.One,
-      {
-        enableScripts: true,
-        localResourceRoots: [
-          vscode.Uri.file(path.join(context.extensionPath, "static"))
-        ]
-      }
-    );
+    if (webviewPanel) {
+      this.panel = webviewPanel;
+    } else {
+      const column = vscode.window.activeTextEditor
+        ? vscode.window.activeTextEditor.viewColumn
+        : undefined;
+      this.panel = vscode.window.createWebviewPanel(
+        viewType,
+        path.basename(uri.fsPath),
+        column || vscode.ViewColumn.One,
+        {
+          enableScripts: true,
+          localResourceRoots: [
+            vscode.Uri.file(path.join(context.extensionPath, "static"))
+          ]
+        }
+      );
+    }
 
-    this.panel.webview.html = this.setupHtml();
     this.panel.onDidDispose(() => this.dispose(), null, this.disposables);
+    this.panel.webview.html = this.setupHtml();
     this.panel.webview.onDidReceiveMessage(
       message => {
         switch (message.command) {
@@ -64,6 +69,10 @@ export default class WebviewERD {
               this.panel.webview.postMessage({
                 command: "value",
                 value
+              });
+              this.panel.webview.postMessage({
+                command: "state",
+                uri: this.uri
               });
             } catch (err) {
               vscode.window.showErrorMessage(err.message);
