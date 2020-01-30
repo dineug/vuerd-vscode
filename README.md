@@ -26,13 +26,14 @@
 | Delete(table, memo)             | Ctrl + Delete                                            |
 | Delete(column)                  | Alt + Delete                                             |
 | Select DataType Hint            | Arrow key(right), Click                                  |
-| Move Data Type Hint             | Arrow key(up, down)                                      |
+| Move DataType Hint              | Arrow key(up, down)                                      |
 | Relationship ZeroOne            | Alt + 1                                                  |
 | Relationship ZeroOneN           | Alt + 2                                                  |
 | Primary Key                     | Alt + K                                                  |
 | Undo                            | Ctrl + Z                                                 |
 | Redo                            | Ctrl + Shift + Z                                         |
 | Editing                         | Enter, dblclick                                          |
+| All Action Stop                 | ESC                                                      |
 
 ## License
 
