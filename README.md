@@ -2,7 +2,19 @@
 
 > [vuerd-plugin-erd](https://github.com/vuerd/vuerd-plugin-erd) ERD Editor vscode extension
 
-![vuerd](./img/vuerd.gif)
+![vuerd](./img/vuerd-info.gif)
+
+## Multiple selection
+
+![vuerd](./img/multiple-selection.gif)
+
+## SQL DDL
+
+![vuerd](./img/sql-ddl.gif)
+
+## Generator Code
+
+![vuerd](./img/generator-code.gif)
 
 ## Usage
 
