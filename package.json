@@ -2,7 +2,7 @@
   "name": "vuerd-vscode",
   "displayName": "ERD Editor",
   "description": "ERD Editor vscode extension",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "icon": "img/vuerd.png",
   "publisher": "dineug",
   "homepage": "https://github.com/vuerd/vuerd-vscode",

@@ -42,10 +42,10 @@
         },
         on: {
           input: value => {
-            this.onInput(value);
+            this.change(value);
           },
           change: value => {
-            this.onInput(value);
+            this.change(value);
           },
           undo: () => {
             this.onUndo();
@@ -61,8 +61,8 @@
         this.width = window.innerWidth;
         this.height = window.innerHeight;
       },
-      onInput(value) {
-        if (this.value !== value) {
+      change(value) {
+        if (this.value !== "" && this.value !== value) {
           const oldValue = this.value;
           this.undoManager.add({
             undo: () => {
