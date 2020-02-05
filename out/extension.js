@@ -10,20 +10,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const path = require("path");
-const vscode = require("vscode");
+const vscode_1 = require("vscode");
 const WebviewManager_1 = require("./WebviewManager");
 function activate(context) {
-    context.subscriptions.push(vscode.commands.registerCommand("vuerd.open", (uri) => {
-        if (uri instanceof vscode.Uri) {
+    context.subscriptions.push(vscode_1.commands.registerCommand("vuerd.open", (uri) => {
+        if (uri instanceof vscode_1.Uri) {
             return WebviewManager_1.webviewManager.add(context, uri);
         }
         else {
-            vscode.window.showInformationMessage("Open a vuerd.json file first to show");
+            vscode_1.window.showInformationMessage("Open a vuerd.json file first to show");
             return;
         }
     }));
-    if (vscode.window.registerWebviewPanelSerializer) {
-        vscode.window.registerWebviewPanelSerializer("vuerd", {
+    if (vscode_1.window.registerWebviewPanelSerializer) {
+        vscode_1.window.registerWebviewPanelSerializer("vuerd", {
             deserializeWebviewPanel(webviewPanel, state) {
                 return __awaiter(this, void 0, void 0, function* () {
                     const uri = state.uri;
@@ -33,16 +33,16 @@ function activate(context) {
         });
     }
     // Automatically preview content piped from stdin (when VSCode is already open)
-    vscode.workspace.onDidOpenTextDocument(document => {
+    vscode_1.workspace.onDidOpenTextDocument(document => {
         if (isVuerdFile(document)) {
-            vscode.commands.executeCommand("vuerd.open", document.uri);
+            vscode_1.commands.executeCommand("vuerd.open", document.uri);
         }
     });
     // Automaticlly preview content piped from stdin (when VSCode first starts up)
-    if (vscode.window.activeTextEditor) {
-        const document = vscode.window.activeTextEditor.document;
+    if (vscode_1.window.activeTextEditor) {
+        const document = vscode_1.window.activeTextEditor.document;
         if (isVuerdFile(document)) {
-            vscode.commands.executeCommand("vuerd.open", document.uri);
+            vscode_1.commands.executeCommand("vuerd.open", document.uri);
         }
     }
 }

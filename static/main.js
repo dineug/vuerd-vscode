@@ -2,11 +2,11 @@
   document.body.style = `padding: 0; margin: 0;`;
   let app = null;
   const vscode = acquireVsCodeApi();
-  const UndoManager = window.UndoManager;
 
   // receive: extension message
   window.addEventListener("message", event => {
     const message = event.data;
+    console.log(message);
     switch (message.command) {
       case "value":
         if (app !== null) {
@@ -15,6 +15,12 @@
         break;
       case "state":
         vscode.setState({ uri: message.uri });
+        break;
+      case "hasUndoRedo":
+        if (app !== null) {
+          app.$data.undo = message.undo;
+          app.$data.redo = message.redo;
+        }
         break;
     }
   });
@@ -62,37 +68,21 @@
         this.height = window.innerHeight;
       },
       change(value) {
-        if (this.value !== "" && this.value !== value) {
-          const oldValue = this.value;
-          this.undoManager.add({
-            undo: () => {
-              this.value = oldValue;
-              this.onPostMessage(oldValue);
-            },
-            redo: () => {
-              this.value = value;
-              this.onPostMessage(value);
-            }
-          });
-        }
         this.value = value;
-        this.onPostMessage(value);
-      },
-      onUndo() {
-        this.undoManager.undo();
-      },
-      onRedo() {
-        this.undoManager.redo();
-      },
-      onPostMessage(value) {
         vscode.postMessage({
           command: "value",
           value
         });
       },
-      callback() {
-        this.undo = this.undoManager.hasUndo();
-        this.redo = this.undoManager.hasRedo();
+      onUndo() {
+        vscode.postMessage({
+          command: "undo"
+        });
+      },
+      onRedo() {
+        vscode.postMessage({
+          command: "redo"
+        });
       },
       reStyleSpanText() {
         const span = document.getElementById("span-text-width-erd");
@@ -106,10 +96,6 @@
           `;
         }
       }
-    },
-    created() {
-      this.undoManager = new UndoManager();
-      this.undoManager.setCallback(this.callback);
     },
     mounted() {
       this.reStyleSpanText();

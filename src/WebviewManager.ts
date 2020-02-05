@@ -1,4 +1,4 @@
-import * as vscode from "vscode";
+import { ExtensionContext, Uri, WebviewPanel } from "vscode";
 import WebviewERD from "./WebviewERD";
 
 class WebviewManager {
@@ -8,7 +8,7 @@ class WebviewManager {
     this.erdList = [];
   }
 
-  public add(context: vscode.ExtensionContext, uri: vscode.Uri): WebviewERD {
+  public add(context: ExtensionContext, uri: Uri): WebviewERD {
     let erd = this.find(uri);
     if (erd === null) {
       erd = new WebviewERD(context, uri, this);
@@ -20,9 +20,9 @@ class WebviewManager {
   }
 
   public revive(
-    context: vscode.ExtensionContext,
-    uri: vscode.Uri,
-    webviewPanel: vscode.WebviewPanel
+    context: ExtensionContext,
+    uri: Uri,
+    webviewPanel: WebviewPanel
   ) {
     this.erdList.push(new WebviewERD(context, uri, this, webviewPanel));
   }
@@ -34,7 +34,7 @@ class WebviewManager {
     }
   }
 
-  public find(uri: vscode.Uri): WebviewERD | null {
+  public find(uri: Uri): WebviewERD | null {
     let target: WebviewERD | null = null;
     for (const erd of this.erdList) {
       if (erd.uri.fsPath === uri.fsPath) {
