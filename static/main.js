@@ -6,7 +6,6 @@
   // receive: extension message
   window.addEventListener("message", event => {
     const message = event.data;
-    console.log(message);
     switch (message.command) {
       case "value":
         if (app !== null) {
@@ -47,9 +46,6 @@
           redo: this.redo
         },
         on: {
-          input: value => {
-            this.change(value);
-          },
           change: value => {
             this.change(value);
           },
@@ -85,7 +81,7 @@
         });
       },
       reStyleSpanText() {
-        const span = document.getElementById("span-text-width-erd");
+        const span = document.querySelector("#span-text-width-erd");
         if (span) {
           span.style = `
           visibility: hidden;

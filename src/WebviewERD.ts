@@ -103,7 +103,7 @@ export default class WebviewERD {
             return;
           case "getValue":
             try {
-              this.currentValue = fs.readFileSync(this.uri.fsPath, "utf-8");
+              this.currentValue = fs.readFileSync(this.uri.fsPath, "utf8");
               this.panel.webview.postMessage({
                 command: "value",
                 value: this.currentValue
