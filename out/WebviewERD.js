@@ -49,6 +49,7 @@ class WebviewERD {
                     if (this.currentValue !== "" &&
                         this.currentValue !== message.value) {
                         const oldValue = this.currentValue;
+                        const newValue = message.value;
                         this.undoManager.add({
                             undo: () => {
                                 this.panel.webview.postMessage({
@@ -61,10 +62,10 @@ class WebviewERD {
                             redo: () => {
                                 this.panel.webview.postMessage({
                                     command: "value",
-                                    value: message.value
+                                    value: newValue
                                 });
-                                this.currentValue = message.value;
-                                this.value$.next(message.value);
+                                this.currentValue = newValue;
+                                this.value$.next(newValue);
                             }
                         });
                     }
