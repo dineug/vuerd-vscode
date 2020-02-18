@@ -1,8 +1,8 @@
 # vuerd-vscode
 
-> [vuerd-plugin-erd](https://github.com/vuerd/vuerd-plugin-erd) ERD Editor vscode extension
+> [vuerd](https://github.com/vuerd/vuerd) ERD Editor vscode extension
 
-[![npm version](https://img.shields.io/npm/v/vuerd-plugin-erd.svg?color=blue)](https://www.npmjs.com/package/vuerd-plugin-erd) [![VS Marketplace version](https://vsmarketplacebadge.apphb.com/version-short/dineug.vuerd-vscode.svg?color=blue)](https://marketplace.visualstudio.com/items?itemName=dineug.vuerd-vscode) [![GitHub](https://img.shields.io/github/license/vuerd/vuerd-plugin-erd)](https://github.com/vuerd/vuerd-plugin-erd/blob/master/LICENSE)
+[![npm version](https://img.shields.io/npm/v/vuerd.svg?color=blue)](https://www.npmjs.com/package/vuerd) [![VS Marketplace version](https://vsmarketplacebadge.apphb.com/version-short/dineug.vuerd-vscode.svg?color=blue)](https://marketplace.visualstudio.com/items?itemName=dineug.vuerd-vscode) [![GitHub](https://img.shields.io/github/license/vuerd/vuerd)](https://github.com/vuerd/vuerd/blob/master/LICENSE)
 
 ![vuerd](./img/vuerd-info.gif)
 

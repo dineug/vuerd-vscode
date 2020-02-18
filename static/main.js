@@ -24,7 +24,7 @@
     }
   });
 
-  const Vuerd = window["vuerd-plugin-erd"].Vuerd;
+  const Vuerd = window["vuerd"].default;
   app = new Vue({
     el: "#app",
     data: () => ({

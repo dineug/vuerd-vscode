@@ -157,13 +157,13 @@ export default class WebviewERD {
       path.join(this.extensionPath, "static", "vue.min.js")
     );
     const pathVuerd = Uri.file(
-      path.join(this.extensionPath, "static", "vuerd-plugin-erd.umd.min.js")
+      path.join(this.extensionPath, "static", "vuerd.umd.min.js")
     );
     const pathMain = Uri.file(
       path.join(this.extensionPath, "static", "main.js")
     );
     const pathCss = Uri.file(
-      path.join(this.extensionPath, "static", "vuerd-plugin-erd.css")
+      path.join(this.extensionPath, "static", "vuerd.css")
     );
 
     const uriVue = this.panel.webview.asWebviewUri(pathVue);
@@ -171,6 +171,7 @@ export default class WebviewERD {
     const urlMain = this.panel.webview.asWebviewUri(pathMain);
     const uriCss = this.panel.webview.asWebviewUri(pathCss);
     const nonce = getNonce();
+    const cspSource = this.panel.webview.cspSource;
 
     return `
     <!DOCTYPE html>
@@ -179,11 +180,11 @@ export default class WebviewERD {
       <meta charset="UTF-8">
       <meta
         http-equiv="Content-Security-Policy"
-        content="default-src 'none'; img-src ${this.panel.webview.cspSource} data:; style-src 'nonce-${nonce}'; script-src 'nonce-${nonce}';"
+        content="default-src 'none'; img-src ${cspSource} data:; style-src ${cspSource} 'unsafe-inline'; script-src 'nonce-${nonce}';"
       >
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>vuerd</title>
-      <link rel="stylesheet" type="text/css" nonce="${nonce}" href=${uriCss} />
+      <link rel="stylesheet" type="text/css" href=${uriCss} />
     </head>
     <body>
       <div id="app"></div>
