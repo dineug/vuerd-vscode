@@ -24,7 +24,7 @@
     }
   });
 
-  const Vuerd = window["vuerd"].default;
+  const Vuerd = window.vuerd.default;
   app = new Vue({
     el: "#app",
     data: () => ({
