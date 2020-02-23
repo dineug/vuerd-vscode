@@ -1,5 +1,9 @@
 # vuerd-vscode
 
+## 기초 사용 방법 
+1. [filename].vuerd.json 양식으로 파일 저장 
+2. 저장한 파일에 Focus를 하고 Editor창 우상단의 vuerd icon 클릭
+
 > [vuerd](https://github.com/vuerd/vuerd) ERD Editor vscode extension
 
 [![npm version](https://img.shields.io/npm/v/vuerd.svg?color=blue)](https://www.npmjs.com/package/vuerd) [![VS Marketplace version](https://vsmarketplacebadge.apphb.com/version-short/dineug.vuerd-vscode.svg?color=blue)](https://marketplace.visualstudio.com/items?itemName=dineug.vuerd-vscode) [![GitHub](https://img.shields.io/github/license/vuerd/vuerd)](https://github.com/vuerd/vuerd/blob/master/LICENSE)
