@@ -1,12 +1,5 @@
 # vuerd-vscode
 
-## Usage
-
-1. ERD data [filename].vuerd.json Save a file as a form
-1. Focus on the saved file and click the vuerd icon in the upper right corner of the Editor window
-   ![Image](./img/vuerd-vscode-1.png)
-   ![Image](./img/vuerd-vscode-2.png)
-
 > [vuerd](https://github.com/vuerd/vuerd) ERD Editor vscode extension
 
 [![npm version](https://img.shields.io/npm/v/vuerd.svg?color=blue)](https://www.npmjs.com/package/vuerd) [![VS Marketplace version](https://vsmarketplacebadge.apphb.com/version-short/dineug.vuerd-vscode.svg?color=blue)](https://marketplace.visualstudio.com/items?itemName=dineug.vuerd-vscode) [![GitHub](https://img.shields.io/github/license/vuerd/vuerd)](https://github.com/vuerd/vuerd/blob/master/LICENSE)
@@ -27,9 +20,10 @@
 
 ## Usage
 
-1. Creating an ERD data file \*.vuerd.json
-1. ![Image](./img/vuerd-vscode-1.png)
-1. ![Image](./img/vuerd-vscode-2.png)
+1. ERD data [filename].vuerd.json Save a file as a form
+1. Focus on the saved file and click the vuerd icon in the upper right corner of the Editor window
+   ![Image](./img/vuerd-vscode-1.png)
+   ![Image](./img/vuerd-vscode-2.png)
 
 ## Document
 
