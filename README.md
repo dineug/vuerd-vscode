@@ -6,23 +6,23 @@
 
 ## ERD
 
-![vuerd](./img/vuerd-erd.gif)
+![vuerd](https://github.com/vuerd/vuerd/blob/master/img/vuerd-erd.gif?raw=true)
 
 ## SQL DDL
 
-![vuerd](./img/vuerd-ddl.gif)
+![vuerd](https://github.com/vuerd/vuerd/blob/master/img/vuerd-ddl.gif?raw=true)
 
 ## Generator Code
 
-![vuerd](./img/vuerd-generator-code.gif)
+![vuerd](https://github.com/vuerd/vuerd/blob/master/img/vuerd-generator-code.gif?raw=true)
 
 ## Visualization
 
-![vuerd](./img/vuerd-visualization.gif)
+![vuerd](https://github.com/vuerd/vuerd/blob/master/img/vuerd-visualization.gif?raw=true)
 
 ## SQL DDL Import
 
-![vuerd](./img/vuerd-ddl-import.gif)
+![vuerd](https://github.com/vuerd/vuerd/blob/master/img/vuerd-ddl-import.gif?raw=true)
 
 ## Usage
 
