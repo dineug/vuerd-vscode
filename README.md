@@ -4,19 +4,25 @@
 
 [![npm version](https://img.shields.io/npm/v/vuerd.svg?color=blue)](https://www.npmjs.com/package/vuerd) [![VS Marketplace version](https://vsmarketplacebadge.apphb.com/version-short/dineug.vuerd-vscode.svg?color=blue)](https://marketplace.visualstudio.com/items?itemName=dineug.vuerd-vscode) [![GitHub](https://img.shields.io/github/license/vuerd/vuerd)](https://github.com/vuerd/vuerd/blob/master/LICENSE)
 
-![vuerd](./img/vuerd-info.gif)
+## ERD
 
-## Multiple selection
-
-![vuerd](./img/multiple-selection.gif)
+![vuerd](./img/vuerd-erd.gif)
 
 ## SQL DDL
 
-![vuerd](./img/sql-ddl.gif)
+![vuerd](./img/vuerd-ddl.gif)
 
 ## Generator Code
 
-![vuerd](./img/generator-code.gif)
+![vuerd](./img/vuerd-generator-code.gif)
+
+## Visualization
+
+![vuerd](./img/vuerd-visualization.gif)
+
+## SQL DDL Import
+
+![vuerd](./img/vuerd-ddl-import.gif)
 
 ## Usage
 
