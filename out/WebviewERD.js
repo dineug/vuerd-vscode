@@ -133,10 +133,12 @@ class WebviewERD {
     <html lang="en">
     <head>
       <meta charset="UTF-8">
-      <meta
-        http-equiv="Content-Security-Policy"
-        content="default-src 'none'; img-src ${cspSource} data:; style-src ${cspSource} 'unsafe-inline'; script-src 'nonce-${nonce}';"
-      >
+      <meta http-equiv="Content-Security-Policy" 
+      content="default-src * ${cspSource} https: 'unsafe-inline' 'unsafe-eval';
+        script-src ${cspSource} blob: data: https: 'unsafe-inline' 'unsafe-eval' 'nonce-${nonce}';
+        style-src ${cspSource} https: 'unsafe-inline';
+        img-src ${cspSource} data: https:;
+        connect-src ${cspSource} blob: data: https: http:;">      
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>vuerd</title>
       <link rel="stylesheet" type="text/css" href=${uriCss} />
