@@ -2,7 +2,7 @@
   "name": "vuerd-vscode",
   "displayName": "ERD Editor",
   "description": "ERD Editor vscode extension",
-  "version": "0.4.3",
+  "version": "0.5.0",
   "icon": "img/vuerd.png",
   "publisher": "dineug",
   "homepage": "https://github.com/vuerd/vuerd-vscode",
@@ -48,7 +48,7 @@
     "commands": [
       {
         "command": "vuerd.open",
-        "title": "ERD Editor Open",
+        "title": "Open ERD Editor",
         "category": "vuerd",
         "icon": {
           "light": "./img/vuerd.png",
@@ -104,7 +104,6 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "electron-google-analytics": "^0.1.0",
-    "rxjs": "^6.5.4"
+    "electron-google-analytics": "^0.1.0"
   }
 }

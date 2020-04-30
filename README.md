@@ -35,30 +35,48 @@
 
 - [Live Demo](https://vuerd.github.io/vuerd/)
 
-## Editor Action
+## Editor Keymap(default)
 
-| Name                            | Action                                                   |
-| ------------------------------- | -------------------------------------------------------- |
-| Multiple selection(table, memo) | Ctrl + Drag, Ctrl + Click, Ctrl + A                      |
-| Multi-movement(table, memo)     | Ctrl + Drag                                              |
-| Column shift                    | Drag                                                     |
-| Multiple selection(column)      | Ctrl + Click, Shift + Click, Shift + Arrow key(up, down) |
-| Copy&Paste(column)              | Ctrl + C, Ctrl + V                                       |
-| Contextmenu                     | Right-click                                              |
-| New Table                       | Alt + N                                                  |
-| New Memo                        | Alt + M                                                  |
-| New Column                      | Alt + Enter                                              |
-| Delete(table, memo)             | Ctrl + Delete                                            |
-| Delete(column)                  | Alt + Delete                                             |
-| Select DataType Hint            | Arrow key(right), Click                                  |
-| Move DataType Hint              | Arrow key(up, down)                                      |
-| Relationship ZeroOne            | Alt + 1                                                  |
-| Relationship ZeroOneN           | Alt + 2                                                  |
-| Primary Key                     | Alt + K                                                  |
-| Undo                            | Ctrl + Z                                                 |
-| Redo                            | Ctrl + Shift + Z                                         |
-| Editing                         | Enter, dblclick                                          |
-| All Action Stop                 | ESC                                                      |
+| Name                                                | Action                                                          |
+| --------------------------------------------------- | --------------------------------------------------------------- |
+| Editing - ERD                                       | dblclick, Enter                                                 |
+| Editing - Grid                                      | dblclick, Enter                                                 |
+| All Stop                                            | Escape                                                          |
+| Selection - table, memo                             | Ctrl + Drag, Click, Ctrl + Click, Ctrl + Alt + A                |
+| Selection - column                                  | Click, Ctrl + Click, Shift + Click, Shift + Arrow key(up, down) |
+| Movement - table, memo, column                      | Drag, Ctrl + Drag                                               |
+| Copy - column                                       | Ctrl + C                                                        |
+| Paste - column                                      | Ctrl + V                                                        |
+| Contextmenu - ERD, Relationship, SQL, GeneratorCode | Right-click                                                     |
+| New Table                                           | Alt + N                                                         |
+| New Memo                                            | Alt + M                                                         |
+| New Column                                          | Alt + Enter                                                     |
+| Delete - table, memo                                | Ctrl + Delete                                                   |
+| Delete - column                                     | Alt + Delete                                                    |
+| Select DataType Hint                                | Arrow key(right), Click                                         |
+| Move DataType Hint                                  | Arrow key(up, down)                                             |
+| Primary Key                                         | Alt + K                                                         |
+| Option Checked - Grid                               | Space, Click                                                    |
+| Move Option - Grid                                  | Arrow key(up, down, left, right)                                |
+| Relationship - Zero One N                           | Ctrl + Alt + 1                                                  |
+| Relationship - Zero One                             | Ctrl + Alt + 2                                                  |
+| Relationship - Zero N                               | Ctrl + Alt + 3                                                  |
+| Relationship - One Only                             | Ctrl + Alt + 4                                                  |
+| Relationship - One N                                | Ctrl + Alt + 5                                                  |
+| Relationship - One                                  | Ctrl + Alt + 6                                                  |
+| Relationship - N                                    | Ctrl + Alt + 7                                                  |
+
+## TODO
+
+- [ ] Undo, Redo Manager
+- [ ] Grid filter
+- [ ] ERD Table finder
+- [ ] Real-time simultaneous editing api
+- [ ] SQL index Support [#9](https://github.com/vuerd/vuerd-vscode/issues/9)
+- SQL DDL import Support [#7](https://github.com/vuerd/vuerd-vscode/issues/7)
+  - [ ] Oracle
+  - [ ] MSSQL
+  - [ ] PostgreSQL
 
 ## License
 

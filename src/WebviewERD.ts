@@ -6,12 +6,9 @@ import {
   Uri,
   ExtensionContext,
   window,
-  ViewColumn
+  ViewColumn,
 } from "vscode";
 import WebviewManager from "./WebviewManager";
-import { Subscription, Subject } from "rxjs";
-import { debounceTime } from "rxjs/operators";
-import UndoManager from "./UndoManager";
 
 const viewType = "vuerd";
 
@@ -19,10 +16,6 @@ export default class WebviewERD {
   private extensionPath: string;
   private disposables: Disposable[] = [];
   private webviewManager: WebviewManager;
-  private value$: Subject<string> = new Subject();
-  private subValue: Subscription;
-  private undoManager: UndoManager;
-  private currentValue = "";
 
   public panel: WebviewPanel;
   public uri: Uri;
@@ -36,15 +29,6 @@ export default class WebviewERD {
     this.uri = uri;
     this.webviewManager = webviewManager;
     this.extensionPath = context.extensionPath;
-    this.subValue = this.value$
-      .pipe(debounceTime(300))
-      .subscribe((value: string) => {
-        fs.writeFile(this.uri.fsPath, value, err => {
-          if (err) {
-            window.showErrorMessage(err.message);
-          }
-        });
-      });
 
     if (webviewPanel) {
       this.panel = webviewPanel;
@@ -59,71 +43,43 @@ export default class WebviewERD {
         {
           enableScripts: true,
           localResourceRoots: [
-            Uri.file(path.join(context.extensionPath, "static"))
-          ]
+            Uri.file(path.join(context.extensionPath, "static")),
+          ],
         }
       );
     }
 
-    this.undoManager = new UndoManager(() => {
-      this.hasUndoRedo();
-    });
     this.panel.onDidDispose(() => this.dispose(), null, this.disposables);
     this.panel.webview.html = this.setupHtml();
     this.panel.webview.onDidReceiveMessage(
       message => {
         switch (message.command) {
           case "value":
-            if (
-              this.currentValue !== "" &&
-              this.currentValue !== message.value
-            ) {
-              const oldValue = this.currentValue;
-              const newValue = message.value;
-              this.undoManager.add({
-                undo: () => {
-                  this.panel.webview.postMessage({
-                    command: "value",
-                    value: oldValue
-                  });
-                  this.currentValue = oldValue;
-                  this.value$.next(oldValue);
-                },
-                redo: () => {
-                  this.panel.webview.postMessage({
-                    command: "value",
-                    value: newValue
-                  });
-                  this.currentValue = newValue;
-                  this.value$.next(newValue);
+            fs.writeFile(
+              this.uri.fsPath,
+              JSON.stringify(JSON.parse(message.value), null, 2),
+              err => {
+                if (err) {
+                  window.showErrorMessage(err.message);
                 }
-              });
-            }
-            this.currentValue = message.value;
-            this.value$.next(message.value);
+              }
+            );
             return;
           case "getValue":
             try {
-              this.currentValue = fs.readFileSync(this.uri.fsPath, "utf8");
+              const value = fs.readFileSync(this.uri.fsPath, "utf8");
               this.panel.webview.postMessage({
                 command: "value",
-                value: this.currentValue
+                value,
               });
               this.panel.webview.postMessage({
                 command: "state",
-                uri: this.uri
+                uri: this.uri,
               });
-              this.hasUndoRedo();
             } catch (err) {
               window.showErrorMessage(err.message);
             }
             return;
-          case "undo":
-            this.undoManager.undo();
-            break;
-          case "redo":
-            this.undoManager.redo();
-            break;
         }
       },
       null,
@@ -140,36 +96,18 @@ export default class WebviewERD {
         item.dispose();
       }
     }
-    this.subValue.unsubscribe();
-    this.undoManager.clear();
-  }
-
-  private hasUndoRedo() {
-    this.panel.webview.postMessage({
-      command: "hasUndoRedo",
-      undo: this.undoManager.hasUndo(),
-      redo: this.undoManager.hasRedo()
-    });
   }
 
   private setupHtml() {
-    const pathVue = Uri.file(
-      path.join(this.extensionPath, "static", "vue.min.js")
-    );
     const pathVuerd = Uri.file(
-      path.join(this.extensionPath, "static", "vuerd.umd.min.js")
+      path.join(this.extensionPath, "static", "vuerd.min.js")
     );
     const pathMain = Uri.file(
       path.join(this.extensionPath, "static", "main.js")
     );
-    const pathCss = Uri.file(
-      path.join(this.extensionPath, "static", "vuerd.css")
-    );
 
-    const uriVue = this.panel.webview.asWebviewUri(pathVue);
     const uriVuerd = this.panel.webview.asWebviewUri(pathVuerd);
     const urlMain = this.panel.webview.asWebviewUri(pathMain);
-    const uriCss = this.panel.webview.asWebviewUri(pathCss);
     const nonce = getNonce();
     const cspSource = this.panel.webview.cspSource;
 
@@ -186,11 +124,9 @@ export default class WebviewERD {
         connect-src ${cspSource} blob: data: https: http:;">      
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>vuerd</title>
-      <link rel="stylesheet" type="text/css" href=${uriCss} />
     </head>
     <body>
       <div id="app"></div>
-      <script nonce="${nonce}" src=${uriVue}></script>
       <script nonce="${nonce}" src=${uriVuerd}></script>
       <script nonce="${nonce}" src=${urlMain}></script>
     </body>
