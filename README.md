@@ -37,39 +37,40 @@
 
 ## Editor Keymap(default)
 
-| Name                                                | Action                                                          |
-| --------------------------------------------------- | --------------------------------------------------------------- |
-| Editing - ERD                                       | dblclick, Enter                                                 |
-| Editing - Grid                                      | dblclick, Enter                                                 |
-| All Stop                                            | Escape                                                          |
-| Selection - table, memo                             | Ctrl + Drag, Click, Ctrl + Click, Ctrl + Alt + A                |
-| Selection - column                                  | Click, Ctrl + Click, Shift + Click, Shift + Arrow key(up, down) |
-| Movement - table, memo, column                      | Drag, Ctrl + Drag                                               |
-| Copy - column                                       | Ctrl + C                                                        |
-| Paste - column                                      | Ctrl + V                                                        |
-| Contextmenu - ERD, Relationship, SQL, GeneratorCode | Right-click                                                     |
-| New Table                                           | Alt + N                                                         |
-| New Memo                                            | Alt + M                                                         |
-| New Column                                          | Alt + Enter                                                     |
-| Delete - table, memo                                | Ctrl + Delete                                                   |
-| Delete - column                                     | Alt + Delete                                                    |
-| Select DataType Hint                                | Arrow key(right), Click                                         |
-| Move DataType Hint                                  | Arrow key(up, down)                                             |
-| Primary Key                                         | Alt + K                                                         |
-| Option Checked - Grid                               | Space, Click                                                    |
-| Move Option - Grid                                  | Arrow key(up, down, left, right)                                |
-| Relationship - Zero One N                           | Ctrl + Alt + 1                                                  |
-| Relationship - Zero One                             | Ctrl + Alt + 2                                                  |
-| Relationship - Zero N                               | Ctrl + Alt + 3                                                  |
-| Relationship - One Only                             | Ctrl + Alt + 4                                                  |
-| Relationship - One N                                | Ctrl + Alt + 5                                                  |
-| Relationship - One                                  | Ctrl + Alt + 6                                                  |
-| Relationship - N                                    | Ctrl + Alt + 7                                                  |
+| Name                                                | Action                                                                   |
+| --------------------------------------------------- | ------------------------------------------------------------------------ |
+| Editing - ERD                                       | dblclick, Enter                                                          |
+| Editing - Grid                                      | dblclick, Enter                                                          |
+| All Stop                                            | Escape                                                                   |
+| filter - Grid                                       | Ctrl + Alt + F                                                           |
+| Selection - table, memo                             | Ctrl + Drag, Click, Ctrl + Click, Ctrl + Alt + A                         |
+| Selection - column, filter                          | Click, Ctrl + Click, Shift + Click, Shift + Arrow key(up, down), Alt + A |
+| Movement - table, memo, column, filter              | Drag, Ctrl + Drag                                                        |
+| Copy - column                                       | Ctrl + C                                                                 |
+| Paste - column                                      | Ctrl + V                                                                 |
+| Contextmenu - ERD, Relationship, SQL, GeneratorCode | Right-click                                                              |
+| New Table                                           | Alt + N                                                                  |
+| New Memo                                            | Alt + M                                                                  |
+| New - Column, filter                                | Alt + Enter                                                              |
+| Delete - table, memo                                | Ctrl + Delete                                                            |
+| Delete - column, filter                             | Alt + Delete                                                             |
+| Select DataType Hint                                | Arrow key(right), Click                                                  |
+| Move DataType Hint                                  | Arrow key(up, down)                                                      |
+| Primary Key                                         | Alt + K                                                                  |
+| checkbox - Grid, filter                             | Space, Click                                                             |
+| Move checkbox - Grid, filter                        | Arrow key(up, down, left, right)                                         |
+| Relationship - Zero One N                           | Ctrl + Alt + 1                                                           |
+| Relationship - Zero One                             | Ctrl + Alt + 2                                                           |
+| Relationship - Zero N                               | Ctrl + Alt + 3                                                           |
+| Relationship - One Only                             | Ctrl + Alt + 4                                                           |
+| Relationship - One N                                | Ctrl + Alt + 5                                                           |
+| Relationship - One                                  | Ctrl + Alt + 6                                                           |
+| Relationship - N                                    | Ctrl + Alt + 7                                                           |
 
 ## TODO
 
 - [ ] Undo, Redo Manager
-- [ ] Grid filter
+- [x] Grid filter
 - [ ] ERD Table finder
 - [ ] Real-time simultaneous editing api
 - [ ] SQL index Support [#9](https://github.com/vuerd/vuerd-vscode/issues/9)
@@ -77,6 +78,7 @@
   - [ ] Oracle
   - [ ] MSSQL
   - [ ] PostgreSQL
+- [ ] SQL-Query generator [#3](https://github.com/vuerd/vuerd/issues/3)
 
 ## License
 
