@@ -10,14 +10,12 @@
       case "value":
         if (editor !== null) {
           editor.addEventListener("change", event => {
-            if (event.detail) {
-              vscode.postMessage({
-                command: "value",
-                value: event.detail.value,
-              });
-            }
+            vscode.postMessage({
+              command: "value",
+              value: event.target.value,
+            });
           });
-          editor.value = message.value;
+          editor.initLoadJson(message.value);
         }
         break;
       case "state":
