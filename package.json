@@ -1,22 +1,12 @@
 {
   "name": "vuerd-vscode",
+  "version": "0.5.5",
   "displayName": "ERD Editor",
   "description": "ERD Editor vscode extension",
-  "version": "0.5.5",
+  "main": "./out/extension.js",
+  "private": true,
   "icon": "img/vuerd.png",
   "publisher": "dineug",
-  "homepage": "https://github.com/vuerd/vuerd-vscode",
-  "bugs": {
-    "url": "https://github.com/vuerd/vuerd-vscode/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/vuerd/vuerd-vscode.git"
-  },
-  "license": "MIT",
-  "engines": {
-    "vscode": "^1.38.0"
-  },
   "categories": [
     "Other"
   ],
@@ -28,11 +18,23 @@
     "db",
     "database"
   ],
+  "homepage": "https://github.com/vuerd/vuerd-vscode",
+  "bugs": {
+    "url": "https://github.com/vuerd/vuerd-vscode/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vuerd/vuerd-vscode.git"
+  },
+  "author": "dineug <dineug2@gmail.com>",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.45.1"
+  },
   "activationEvents": [
     "onCommand:vuerd.open",
     "onWebviewPanel:vuerd"
   ],
-  "main": "./out/extension.js",
   "contributes": {
     "languages": [
       {
