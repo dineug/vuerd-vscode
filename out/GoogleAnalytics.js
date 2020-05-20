@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.sendEvent = void 0;
 // @ts-ignore
 const electron_google_analytics_1 = require("electron-google-analytics");
 function s4() {

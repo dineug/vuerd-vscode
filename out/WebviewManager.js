@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.webviewManager = void 0;
 const WebviewERD_1 = require("./WebviewERD");
 class WebviewManager {
     constructor() {
