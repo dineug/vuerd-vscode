@@ -6,16 +6,14 @@ import {
   window,
   WebviewPanel,
   workspace,
-  TextDocument
+  TextDocument,
 } from "vscode";
 import { webviewManager } from "./WebviewManager";
-import { sendEvent } from "./GoogleAnalytics";
 
 export function activate(context: ExtensionContext) {
   context.subscriptions.push(
     commands.registerCommand("vuerd.open", (uri: any) => {
       if (uri instanceof Uri) {
-        sendEvent();
         return webviewManager.add(context, uri);
       } else {
         window.showInformationMessage("Open a vuerd.json file first to show");
@@ -29,13 +27,12 @@ export function activate(context: ExtensionContext) {
       async deserializeWebviewPanel(webviewPanel: WebviewPanel, state: any) {
         const uri = state.uri as Uri;
         webviewManager.revive(context, uri, webviewPanel);
-        sendEvent();
-      }
+      },
     });
   }
 
   // Automatically preview content piped from stdin (when VSCode is already open)
-  workspace.onDidOpenTextDocument(document => {
+  workspace.onDidOpenTextDocument((document) => {
     if (isVuerdFile(document)) {
       commands.executeCommand("vuerd.open", document.uri);
     }

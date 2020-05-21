@@ -28,8 +28,8 @@
 
 1. ERD data [filename].vuerd.json Save a file as a form
 1. Focus on the saved file and click the vuerd icon in the upper right corner of the Editor window  
-   ![Image](./img/vuerd-vscode-1.png)  
-   ![Image](./img/vuerd-vscode-2.png)
+   ![Image](./img/vuerd-vscode-2.png)  
+   ![Image](./img/vuerd-vscode-1.png)
 
 ## Document
 
