@@ -13,9 +13,11 @@ exports.deactivate = exports.activate = void 0;
 const path = require("path");
 const vscode_1 = require("vscode");
 const WebviewManager_1 = require("./WebviewManager");
+const GoogleAnalytics_1 = require("./GoogleAnalytics");
 function activate(context) {
     context.subscriptions.push(vscode_1.commands.registerCommand("vuerd.open", (uri) => {
         if (uri instanceof vscode_1.Uri) {
+            GoogleAnalytics_1.trackEvent();
             return WebviewManager_1.webviewManager.add(context, uri);
         }
         else {
@@ -29,6 +31,7 @@ function activate(context) {
                 return __awaiter(this, void 0, void 0, function* () {
                     const uri = state.uri;
                     WebviewManager_1.webviewManager.revive(context, uri, webviewPanel);
+                    GoogleAnalytics_1.trackEvent();
                 });
             },
         });

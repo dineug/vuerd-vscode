@@ -9,11 +9,13 @@ import {
   TextDocument,
 } from "vscode";
 import { webviewManager } from "./WebviewManager";
+import { trackEvent } from "./GoogleAnalytics";
 
 export function activate(context: ExtensionContext) {
   context.subscriptions.push(
     commands.registerCommand("vuerd.open", (uri: any) => {
       if (uri instanceof Uri) {
+        trackEvent();
         return webviewManager.add(context, uri);
       } else {
         window.showInformationMessage("Open a vuerd.json file first to show");
@@ -27,6 +29,7 @@ export function activate(context: ExtensionContext) {
       async deserializeWebviewPanel(webviewPanel: WebviewPanel, state: any) {
         const uri = state.uri as Uri;
         webviewManager.revive(context, uri, webviewPanel);
+        trackEvent();
       },
     });
   }
