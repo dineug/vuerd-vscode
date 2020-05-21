@@ -106,6 +106,6 @@
     "typescript": "^3.9.3"
   },
   "dependencies": {
-    "got": "^11.1.4"
+    "@dineug/vscode-google-analytics": "^0.1.1"
   }
 }
