@@ -1,4 +1,4 @@
-import fetch from "node-fetch";
+import got from "got";
 
 function s4() {
   return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
@@ -23,8 +23,8 @@ function uuid() {
 const clientID = uuid();
 
 export function trackEvent() {
-  const formObj: any = {
-    v: "1",
+  const form = {
+    v: 1,
     tid: "UA-131336352-5",
     cid: clientID,
     t: "event",
@@ -32,14 +32,11 @@ export function trackEvent() {
     ea: "open",
     el: "webview",
   };
-  return fetch("https://www.google-analytics.com/collect", {
-    method: "POST",
-    body: Object.keys(formObj)
-      .map((key) => `${encodeURI(key)}=${encodeURI(formObj[key])}`)
-      .join("&"),
-  })
-    .then((res) => res.text())
-    .then(() => {
+  return got
+    .post("https://www.google-analytics.com/collect", {
+      form,
+    })
+    .then((res) => {
       return { clientID };
     })
     .catch((err) => {

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.trackEvent = void 0;
-const node_fetch_1 = require("node-fetch");
+const got_1 = require("got");
 function s4() {
     return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
 }
@@ -23,8 +23,8 @@ function uuid() {
 }
 const clientID = uuid();
 function trackEvent() {
-    const formObj = {
-        v: "1",
+    const form = {
+        v: 1,
         tid: "UA-131336352-5",
         cid: clientID,
         t: "event",
@@ -32,14 +32,11 @@ function trackEvent() {
         ea: "open",
         el: "webview",
     };
-    return node_fetch_1.default("https://www.google-analytics.com/collect", {
-        method: "POST",
-        body: Object.keys(formObj)
-            .map((key) => `${encodeURI(key)}=${encodeURI(formObj[key])}`)
-            .join("&"),
+    return got_1.default
+        .post("https://www.google-analytics.com/collect", {
+        form,
     })
-        .then((res) => res.text())
-        .then(() => {
+        .then((res) => {
         return { clientID };
     })
         .catch((err) => {
