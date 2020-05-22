@@ -13,7 +13,12 @@
     "plugin:prettier/recommended"
   ],
   "parserOptions": {
-    "project": "tsconfig.json"
+    "project": "tsconfig.json",
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "modules": true
+    }
   },
   "rules": {
     "@typescript-eslint/explicit-function-return-type": 0,
