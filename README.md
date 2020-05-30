@@ -86,3 +86,9 @@
 ## License
 
 [MIT](https://github.com/vuerd/vuerd-vscode/blob/master/LICENSE)
+
+## Support
+
+> I'll be glad if my ERD helps you with your work.
+
+<a href="https://www.buymeacoffee.com/dineug" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
