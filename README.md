@@ -75,7 +75,7 @@
 - [x] Undo, Redo Manager
 - [x] Grid filter
 - [x] ERD Table finder
-- [ ] Real-time simultaneous editing api
+- [x] Real-time simultaneous editing api
 - [ ] SQL index Support [#9](https://github.com/vuerd/vuerd-vscode/issues/9)
 - SQL DDL import Support [#7](https://github.com/vuerd/vuerd-vscode/issues/7)
   - [ ] Oracle
