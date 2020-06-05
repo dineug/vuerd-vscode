@@ -52,13 +52,13 @@ export default class WebviewERD {
     this.panel.onDidDispose(() => this.dispose(), null, this.disposables);
     this.panel.webview.html = this.setupHtml();
     this.panel.webview.onDidReceiveMessage(
-      message => {
+      (message) => {
         switch (message.command) {
           case "value":
             fs.writeFile(
               this.uri.fsPath,
-              JSON.stringify(JSON.parse(message.value), null, 2),
-              err => {
+              Buffer.from(JSON.stringify(JSON.parse(message.value), null, 2)),
+              (err) => {
                 if (err) {
                   window.showErrorMessage(err.message);
                 }
