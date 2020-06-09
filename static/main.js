@@ -1,15 +1,15 @@
-(function() {
+(function () {
   document.body.style = `padding: 0; margin: 0;`;
   let editor = null;
   const vscode = acquireVsCodeApi();
 
   // receive: extension message
-  window.addEventListener("message", event => {
+  window.addEventListener("message", (event) => {
     const message = event.data;
     switch (message.command) {
       case "value":
         if (editor !== null) {
-          editor.addEventListener("change", event => {
+          editor.addEventListener("change", (event) => {
             vscode.postMessage({
               command: "value",
               value: event.target.value,
@@ -29,10 +29,10 @@
   vscode.postMessage({
     command: "getValue",
   });
+  container.appendChild(editor);
   window.addEventListener("resize", () => {
     editor.width = window.innerWidth;
     editor.height = window.innerHeight;
   });
   window.dispatchEvent(new Event("resize"));
-  container.appendChild(editor);
 })();
