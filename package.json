@@ -5,6 +5,7 @@
   "description": "ERD Editor vscode extension",
   "main": "./out/extension.js",
   "private": true,
+  "enableProposedApi": true,
   "icon": "img/vuerd.png",
   "publisher": "dineug",
   "categories": [
@@ -32,10 +33,22 @@
     "vscode": "^1.45.1"
   },
   "activationEvents": [
-    "onCommand:vuerd.open",
-    "onWebviewPanel:vuerd"
+    "onCommand:vuerd.webview",
+    "onWebviewPanel:vuerd.webview",
+    "onCustomEditor:vuerd.editor"
   ],
   "contributes": {
+    "customEditors": [
+      {
+        "viewType": "vuerd.editor",
+        "displayName": "vuerd",
+        "selector": [
+          {
+            "filenamePattern": "*.vuerd"
+          }
+        ]
+      }
+    ],
     "languages": [
       {
         "id": "vuerd",
@@ -49,7 +62,7 @@
     ],
     "commands": [
       {
-        "command": "vuerd.open",
+        "command": "vuerd.webview",
         "title": "Open ERD Editor",
         "category": "vuerd",
         "icon": {
@@ -61,28 +74,28 @@
     "menus": {
       "explorer/context": [
         {
-          "command": "vuerd.open",
+          "command": "vuerd.webview",
           "when": "resourceLangId == vuerd",
           "group": "navigation"
         }
       ],
       "editor/title": [
         {
-          "command": "vuerd.open",
+          "command": "vuerd.webview",
           "when": "editorLangId == vuerd",
           "group": "navigation"
         }
       ],
       "editor/title/context": [
         {
-          "command": "vuerd.open",
+          "command": "vuerd.webview",
           "when": "resourceLangId == vuerd",
           "group": "navigation"
         }
       ],
       "commandPalette": [
         {
-          "command": "vuerd.open",
+          "command": "vuerd.webview",
           "when": "editorLangId == vuerd",
           "group": "navigation"
         }

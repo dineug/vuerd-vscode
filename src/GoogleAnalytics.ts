@@ -24,10 +24,10 @@ function uuid() {
 const analytics = new Analytics("UA-131336352-5");
 const clientID = uuid();
 
-export function trackEvent() {
+export function trackEvent(action: string) {
   analytics.send({
     category: "vscode",
-    action: "open",
+    action,
     label: "webview",
     clientID,
   });

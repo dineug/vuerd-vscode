@@ -8,14 +8,20 @@ import {
   workspace,
   TextDocument,
 } from "vscode";
-import { webviewManager } from "./WebviewManager";
 import { trackEvent } from "./GoogleAnalytics";
+import { webviewManager } from "./WebviewManager";
+import { ERDEditorProvider } from "./ERDEditorProvider";
+import { ERDEditorTextProvider } from "./ERDEditorTextProvider";
 
 export function activate(context: ExtensionContext) {
+  context.subscriptions.push(ERDEditorProvider.register(context));
+  // !undo manager bug
+  // context.subscriptions.push(ERDEditorTextProvider.register(context));
+
   context.subscriptions.push(
-    commands.registerCommand("vuerd.open", (uri: any) => {
+    commands.registerCommand("vuerd.webview", (uri: any) => {
       if (uri instanceof Uri) {
-        trackEvent();
+        trackEvent("vuerd.webview");
         return webviewManager.add(context, uri);
       } else {
         window.showInformationMessage("Open a vuerd.json file first to show");
@@ -25,11 +31,11 @@ export function activate(context: ExtensionContext) {
   );
 
   if (window.registerWebviewPanelSerializer) {
-    window.registerWebviewPanelSerializer("vuerd", {
+    window.registerWebviewPanelSerializer("vuerd.webview", {
       async deserializeWebviewPanel(webviewPanel: WebviewPanel, state: any) {
         const uri = state.uri as Uri;
         webviewManager.revive(context, uri, webviewPanel);
-        trackEvent();
+        trackEvent("vuerd.webview");
       },
     });
   }
@@ -37,7 +43,7 @@ export function activate(context: ExtensionContext) {
   // Automatically preview content piped from stdin (when VSCode is already open)
   workspace.onDidOpenTextDocument((document) => {
     if (isVuerdFile(document)) {
-      commands.executeCommand("vuerd.open", document.uri);
+      commands.executeCommand("vuerd.webview", document.uri);
     }
   });
 
@@ -45,7 +51,7 @@ export function activate(context: ExtensionContext) {
   if (window.activeTextEditor) {
     const document = window.activeTextEditor.document;
     if (isVuerdFile(document)) {
-      commands.executeCommand("vuerd.open", document.uri);
+      commands.executeCommand("vuerd.webview", document.uri);
     }
   }
 }
