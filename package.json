@@ -53,7 +53,7 @@
         "id": "vuerd",
         "extensions": [
           ".vuerd.json",
-          ""
+          ".vuerd"
         ],
         "aliases": [
           "vuerd"
