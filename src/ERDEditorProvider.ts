@@ -87,7 +87,7 @@ class ERDEditorDocument extends Disposable implements vscode.CustomDocument {
     const value = new TextDecoder("utf-8").decode(fileData);
     await vscode.workspace.fs.writeFile(
       targetResource,
-      Buffer.from(JSON.stringify(JSON.parse(value), null, 2))
+      Buffer.from(JSON.stringify(JSON.parse(value), null, 2), "utf8")
     );
   }
 

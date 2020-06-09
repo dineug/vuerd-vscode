@@ -56,7 +56,10 @@ export default class WebviewERD {
           case "value":
             fs.writeFile(
               this.uri.fsPath,
-              Buffer.from(JSON.stringify(JSON.parse(message.value), null, 2)),
+              Buffer.from(
+                JSON.stringify(JSON.parse(message.value), null, 2),
+                "utf8"
+              ),
               (err) => {
                 if (err) {
                   window.showErrorMessage(err.message);

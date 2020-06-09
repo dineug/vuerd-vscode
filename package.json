@@ -5,7 +5,6 @@
   "description": "ERD Editor vscode extension",
   "main": "./out/extension.js",
   "private": true,
-  "enableProposedApi": true,
   "icon": "img/vuerd.png",
   "publisher": "dineug",
   "categories": [
@@ -53,7 +52,8 @@
       {
         "id": "vuerd",
         "extensions": [
-          ".vuerd.json"
+          ".vuerd.json",
+          ""
         ],
         "aliases": [
           "vuerd"
