@@ -6,49 +6,48 @@
   // receive: extension message
   window.addEventListener("message", (event) => {
     const message = event.data;
-    switch (message.command) {
-      case "value":
-        if (editor !== null) {
-          const value = message.value;
-          editor.addEventListener("change", (event) => {
-            vscode.postMessage({
-              command: "value",
-              value: event.target.value,
+    if (message.command) {
+      // webview API
+      switch (message.command) {
+        case "value":
+          if (editor !== null) {
+            editor.addEventListener("change", (event) => {
+              vscode.postMessage({
+                command: "value",
+                value: event.target.value,
+              });
             });
-          });
-          if (typeof value === "string" && value.trim() !== "") {
-            editor.initLoadJson(value);
+            editor.initLoadJson(message.value);
           }
-        }
-        break;
-      case "state":
-        vscode.setState({ uri: message.uri });
-        break;
-    }
-    const { type, body, requestId } = event.data;
-    switch (type) {
-      case "init":
-        const data = new Uint8Array(body.value.data);
-        const value = new TextDecoder("utf-8").decode(data);
+          break;
+        case "state":
+          vscode.setState({ uri: message.uri });
+          break;
+      }
+    } else if (editor !== null && message.type) {
+      // custom editor API
+      const { type, body, requestId } = message;
+      if (type === "init") {
+        const value = new TextDecoder("utf-8").decode(
+          new Uint8Array(body.value.data)
+        );
         editor.addEventListener("change", (event) => {
           vscode.postMessage({
             type: "value",
             value: event.target.value,
           });
         });
-        if (typeof value === "string" && value.trim() !== "") {
-          editor.initLoadJson(value);
-        }
-        break;
-      case "update":
-        if (editor !== null) {
-          const data = body.content
-            ? new Uint8Array(body.content.data)
-            : undefined;
-          const value = new TextDecoder("utf-8").decode(data);
-          editor.value = value;
-        }
-        break;
+        editor.initLoadJson(value);
+      } else if (type === "update") {
+        const data = body.content
+          ? new Uint8Array(body.content.data)
+          : undefined;
+        const value = new TextDecoder("utf-8").decode(data);
+        editor.value = value;
+      } else if (type === "getFileData") {
+        const data = new TextEncoder("utf-8").encode(editor.value);
+        vscode.postMessage({ type: "response", requestId, body: data });
+      }
     }
   });
 

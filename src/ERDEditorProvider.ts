@@ -1,47 +1,37 @@
-import * as path from "path";
 import * as vscode from "vscode";
 import { getHtmlForWebview } from "./util";
 import { Disposable, disposeAll } from "./dispose";
 
-/**
- * Define the type of edits used in paw draw files.
- */
-interface PawDrawEdit {
-  readonly value: string;
-}
-
-interface PawDrawDocumentDelegate {
+interface ERDEditorDocumentDelegate {
   getFileData(): Promise<Uint8Array>;
 }
 
 /**
  * Define the document (the data model) used for paw draw files.
  */
-class PawDrawDocument extends Disposable implements vscode.CustomDocument {
+class ERDEditorDocument extends Disposable implements vscode.CustomDocument {
   static async create(
     uri: vscode.Uri,
     backupId: string | undefined,
-    delegate: PawDrawDocumentDelegate
-  ): Promise<PawDrawDocument | PromiseLike<PawDrawDocument>> {
+    delegate: ERDEditorDocumentDelegate
+  ): Promise<ERDEditorDocument | PromiseLike<ERDEditorDocument>> {
     // If we have a backup, read that. Otherwise read the resource from the workspace
     const dataFile =
       typeof backupId === "string" ? vscode.Uri.parse(backupId) : uri;
     const fileData = await vscode.workspace.fs.readFile(dataFile);
-    return new PawDrawDocument(uri, fileData, delegate);
+    return new ERDEditorDocument(uri, fileData, delegate);
   }
 
   private readonly _uri: vscode.Uri;
 
   private _documentData: Uint8Array;
-  private _edits: Array<PawDrawEdit> = [];
-  private _savedEdits: Array<PawDrawEdit> = [];
 
-  private readonly _delegate: PawDrawDocumentDelegate;
+  private readonly _delegate: ERDEditorDocumentDelegate;
 
   private constructor(
     uri: vscode.Uri,
     initialContent: Uint8Array,
-    delegate: PawDrawDocumentDelegate
+    delegate: ERDEditorDocumentDelegate
   ) {
     super();
     this._uri = uri;
@@ -67,8 +57,7 @@ class PawDrawDocument extends Disposable implements vscode.CustomDocument {
 
   private readonly _onDidChangeDocument = this._register(
     new vscode.EventEmitter<{
-      readonly content?: Uint8Array;
-      readonly edits: readonly PawDrawEdit[];
+      readonly content: Uint8Array;
     }>()
   );
   /**
@@ -77,11 +66,7 @@ class PawDrawDocument extends Disposable implements vscode.CustomDocument {
   public readonly onDidChangeContent = this._onDidChangeDocument.event;
 
   private readonly _onDidChange = this._register(
-    new vscode.EventEmitter<{
-      readonly label: string;
-      undo(): void;
-      redo(): void;
-    }>()
+    new vscode.EventEmitter<void>()
   );
   /**
    * Fired to tell VS Code that an edit has occured in the document.
@@ -105,21 +90,8 @@ class PawDrawDocument extends Disposable implements vscode.CustomDocument {
    *
    * This fires an event to notify VS Code that the document has been edited.
    */
-  makeEdit(edit: PawDrawEdit) {
-    this._edits.push(edit);
-    vscode.workspace.fs.writeFile(
-      this._uri,
-      Buffer.from(JSON.stringify(JSON.parse(edit.value), null, 2))
-    );
-    this._onDidChange.fire({
-      label: "value",
-      undo: async () => {
-        this._edits.pop();
-      },
-      redo: async () => {
-        this._edits.push(edit);
-      },
-    });
+  makeEdit() {
+    this._onDidChange.fire();
   }
 
   /**
@@ -127,7 +99,6 @@ class PawDrawDocument extends Disposable implements vscode.CustomDocument {
    */
   async save(cancellation: vscode.CancellationToken): Promise<void> {
     await this.saveAs(this.uri, cancellation);
-    this._savedEdits = Array.from(this._edits);
   }
 
   /**
@@ -141,7 +112,11 @@ class PawDrawDocument extends Disposable implements vscode.CustomDocument {
     if (cancellation.isCancellationRequested) {
       return;
     }
-    await vscode.workspace.fs.writeFile(targetResource, fileData);
+    const value = new TextDecoder("utf-8").decode(fileData);
+    await vscode.workspace.fs.writeFile(
+      targetResource,
+      Buffer.from(JSON.stringify(JSON.parse(value), null, 2))
+    );
   }
 
   /**
@@ -150,10 +125,8 @@ class PawDrawDocument extends Disposable implements vscode.CustomDocument {
   async revert(_cancellation: vscode.CancellationToken): Promise<void> {
     const diskContent = await vscode.workspace.fs.readFile(this.uri);
     this._documentData = diskContent;
-    this._edits = this._savedEdits;
     this._onDidChangeDocument.fire({
       content: diskContent,
-      edits: this._edits,
     });
   }
 
@@ -197,7 +170,7 @@ class PawDrawDocument extends Disposable implements vscode.CustomDocument {
  * - Backing up a custom editor.
  */
 export class ERDEditorProvider
-  implements vscode.CustomEditorProvider<PawDrawDocument> {
+  implements vscode.CustomEditorProvider<ERDEditorDocument> {
   public static register(context: vscode.ExtensionContext): vscode.Disposable {
     return vscode.window.registerCustomEditorProvider(
       ERDEditorProvider.viewType,
@@ -229,8 +202,8 @@ export class ERDEditorProvider
     uri: vscode.Uri,
     openContext: { backupId?: string },
     _token: vscode.CancellationToken
-  ): Promise<PawDrawDocument> {
-    const document: PawDrawDocument = await PawDrawDocument.create(
+  ): Promise<ERDEditorDocument> {
+    const document: ERDEditorDocument = await ERDEditorDocument.create(
       uri,
       openContext.backupId,
       {
@@ -257,7 +230,6 @@ export class ERDEditorProvider
         // Tell VS Code that the document has been edited by the use.
         this._onDidChangeCustomDocument.fire({
           document,
-          ...e,
         });
       })
     );
@@ -267,7 +239,6 @@ export class ERDEditorProvider
         // Update all webviews when the document changes
         for (const webviewPanel of this.webviews.get(document.uri)) {
           this.postMessage(webviewPanel, "update", {
-            edits: e.edits,
             content: e.content,
           });
         }
@@ -280,7 +251,7 @@ export class ERDEditorProvider
   }
 
   async resolveCustomEditor(
-    document: PawDrawDocument,
+    document: ERDEditorDocument,
     webviewPanel: vscode.WebviewPanel,
     _token: vscode.CancellationToken
   ): Promise<void> {
@@ -311,20 +282,20 @@ export class ERDEditorProvider
   }
 
   private readonly _onDidChangeCustomDocument = new vscode.EventEmitter<
-    vscode.CustomDocumentEditEvent<PawDrawDocument>
+    vscode.CustomDocumentContentChangeEvent<ERDEditorDocument>
   >();
   public readonly onDidChangeCustomDocument = this._onDidChangeCustomDocument
     .event;
 
   public saveCustomDocument(
-    document: PawDrawDocument,
+    document: ERDEditorDocument,
     cancellation: vscode.CancellationToken
   ): Thenable<void> {
     return document.save(cancellation);
   }
 
   public saveCustomDocumentAs(
-    document: PawDrawDocument,
+    document: ERDEditorDocument,
     destination: vscode.Uri,
     cancellation: vscode.CancellationToken
   ): Thenable<void> {
@@ -332,14 +303,14 @@ export class ERDEditorProvider
   }
 
   public revertCustomDocument(
-    document: PawDrawDocument,
+    document: ERDEditorDocument,
     cancellation: vscode.CancellationToken
   ): Thenable<void> {
     return document.revert(cancellation);
   }
 
   public backupCustomDocument(
-    document: PawDrawDocument,
+    document: ERDEditorDocument,
     context: vscode.CustomDocumentBackupContext,
     cancellation: vscode.CancellationToken
   ): Thenable<vscode.CustomDocumentBackup> {
@@ -372,10 +343,10 @@ export class ERDEditorProvider
     panel.webview.postMessage({ type, body });
   }
 
-  private onMessage(document: PawDrawDocument, message: any) {
+  private onMessage(document: ERDEditorDocument, message: any) {
     switch (message.type) {
       case "value":
-        document.makeEdit(message as PawDrawEdit);
+        document.makeEdit();
         return;
 
       case "response": {

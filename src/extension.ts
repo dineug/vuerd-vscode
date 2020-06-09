@@ -7,16 +7,16 @@ import {
   WebviewPanel,
   workspace,
   TextDocument,
+  version,
 } from "vscode";
 import { trackEvent } from "./GoogleAnalytics";
 import { webviewManager } from "./WebviewManager";
 import { ERDEditorProvider } from "./ERDEditorProvider";
-import { ERDEditorTextProvider } from "./ERDEditorTextProvider";
 
 export function activate(context: ExtensionContext) {
-  context.subscriptions.push(ERDEditorProvider.register(context));
-  // !undo manager bug
-  // context.subscriptions.push(ERDEditorTextProvider.register(context));
+  if (+version.match(/1\.(\d+)/)![1] >= 45) {
+    context.subscriptions.push(ERDEditorProvider.register(context));
+  }
 
   context.subscriptions.push(
     commands.registerCommand("vuerd.webview", (uri: any) => {
