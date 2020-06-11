@@ -33,7 +33,7 @@
    ![Image](./img/vuerd-vscode-2.png)  
    ![Image](./img/vuerd-vscode-1.png)
 
-### [Custom Editor API](https://code.visualstudio.com/api/extension-guides/custom-editors) >= vscode v1.45.x
+### [Custom Editor API](https://code.visualstudio.com/api/extension-guides/custom-editors)(recommend) >= vscode v1.45.x
 
 1. ERD data [filename].vuerd Save a file as a form
 
