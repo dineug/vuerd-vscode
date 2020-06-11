@@ -52,7 +52,6 @@
       {
         "id": "vuerd",
         "extensions": [
-          ".vuerd.json",
           ".vuerd"
         ],
         "aliases": [
@@ -75,28 +74,28 @@
       "explorer/context": [
         {
           "command": "vuerd.webview",
-          "when": "resourceLangId == vuerd",
+          "when": "resourceFilename =~ /.*\\.(vuerd.json)/",
           "group": "navigation"
         }
       ],
       "editor/title": [
         {
           "command": "vuerd.webview",
-          "when": "editorLangId == vuerd",
+          "when": "resourceFilename =~ /.*\\.(vuerd.json)/",
           "group": "navigation"
         }
       ],
       "editor/title/context": [
         {
           "command": "vuerd.webview",
-          "when": "resourceLangId == vuerd",
+          "when": "resourceFilename =~ /.*\\.(vuerd.json)/",
           "group": "navigation"
         }
       ],
       "commandPalette": [
         {
           "command": "vuerd.webview",
-          "when": "editorLangId == vuerd",
+          "when": "resourceFilename =~ /.*\\.(vuerd.json)/",
           "group": "navigation"
         }
       ]

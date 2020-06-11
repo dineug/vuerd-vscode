@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
 import { getHtmlForWebview } from "./util";
 import { Disposable, disposeAll } from "./dispose";
+import { trackEvent } from "./GoogleAnalytics";
 
 interface ERDEditorDocumentDelegate {
   getFileData(): Promise<Uint8Array>;
@@ -144,6 +145,7 @@ export class ERDEditorProvider
     openContext: { backupId?: string },
     _token: vscode.CancellationToken
   ): Promise<ERDEditorDocument> {
+    trackEvent("vuerd.editor");
     const document: ERDEditorDocument = await ERDEditorDocument.create(
       uri,
       openContext.backupId,
