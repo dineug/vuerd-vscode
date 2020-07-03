@@ -120,7 +120,7 @@
     "prettier": "^2.0.5",
     "rollup": "^2.18.1",
     "rollup-plugin-eslint": "^7.0.0",
-    "typescript": "^3.9.5",
+    "typescript": "^3.9.6",
     "@dineug/vscode-google-analytics": "^0.1.2"
   },
   "dependencies": {}
