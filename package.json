@@ -107,7 +107,7 @@
     "lint": "eslint . --ext .ts"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^13.0.0",
+    "@rollup/plugin-commonjs": "^14.0.0",
     "@rollup/plugin-node-resolve": "^8.1.0",
     "@rollup/plugin-typescript": "^5.0.1",
     "@types/node": "^14.0.14",
