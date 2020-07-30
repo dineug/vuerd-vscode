@@ -33,13 +33,12 @@
    ![Image](./img/vuerd-vscode-2.png)  
    ![Image](./img/vuerd-vscode-1.png)
 
-### [Custom Editor API](https://code.visualstudio.com/api/extension-guides/custom-editors)(recommend)
+### [Custom Editor API](https://code.visualstudio.com/api/extension-guides/custom-editors)
 
 1. ERD data [filename].vuerd Save a file as a form
 
 ## Document
 
-- [Storybook](https://vuerd.github.io/vuerd/)
 - [Live Demo](https://vuerd.github.io/vuerd/iframe.html?id=editor--load)
 
 ## Editor Keymap(default)
@@ -93,9 +92,3 @@
 ## License
 
 [MIT](https://github.com/vuerd/vuerd-vscode/blob/master/LICENSE)
-
-## Support
-
-> I'll be glad if my ERD helps you with your work.
-
-<a href="https://www.buymeacoffee.com/dineug" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" width="217" height="51"></a>
