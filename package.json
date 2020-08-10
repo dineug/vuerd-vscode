@@ -1,6 +1,6 @@
 {
   "name": "vuerd-vscode",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "displayName": "ERD Editor",
   "description": "ERD Editor vscode extension",
   "main": "./out/extension.js",
@@ -16,7 +16,8 @@
     "Editor",
     "vscode",
     "db",
-    "database"
+    "database",
+    "diagram"
   ],
   "homepage": "https://github.com/vuerd/vuerd-vscode",
   "bugs": {
@@ -118,7 +119,7 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "prettier": "^2.0.5",
-    "rollup": "^2.23.0",
+    "rollup": "^2.23.1",
     "rollup-plugin-eslint": "^7.0.0",
     "typescript": "^3.9.7",
     "@dineug/vscode-google-analytics": "^0.1.2"
