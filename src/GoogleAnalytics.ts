@@ -1,34 +1,27 @@
 // @ts-ignore
 import { Analytics } from "@dineug/vscode-google-analytics";
-
-function s4() {
-  return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-}
-function uuid() {
-  return [
-    s4(),
-    s4(),
-    "-",
-    s4(),
-    "-",
-    s4(),
-    "-",
-    s4(),
-    "-",
-    s4(),
-    s4(),
-    s4(),
-  ].join("");
-}
+import macaddress from "macaddress";
 
 const analytics = new Analytics("UA-131336352-5");
-const clientID = uuid();
+let clientID: string | null = null;
 
 export function trackEvent(action: string) {
-  analytics.send({
-    category: "vscode",
-    action,
-    label: "webview",
-    clientID,
-  });
+  if (clientID === null) {
+    macaddress.one().then((mac) => {
+      clientID = mac;
+      analytics.send({
+        category: "vscode",
+        action,
+        label: "webview",
+        clientID,
+      });
+    });
+  } else {
+    analytics.send({
+      category: "vscode",
+      action,
+      label: "webview",
+      clientID,
+    });
+  }
 }
