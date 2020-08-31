@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { getHtmlForWebview } from "./util";
+import { getHtmlForWebview, getTheme } from "./util";
 import { Disposable, disposeAll } from "./dispose";
 import { trackEvent } from "./GoogleAnalytics";
 
@@ -212,6 +212,9 @@ export class ERDEditorProvider
 
     webviewPanel.webview.onDidReceiveMessage((e) => {
       if (e.command === "getValue") {
+        this.postMessage(webviewPanel, "theme", {
+          value: getTheme(),
+        });
         this.postMessage(webviewPanel, "init", {
           value: document.documentData,
         });

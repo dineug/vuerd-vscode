@@ -1,5 +1,5 @@
 import * as path from "path";
-import { Webview, Uri, ExtensionContext } from "vscode";
+import { Webview, Uri, ExtensionContext, workspace } from "vscode";
 
 export function getNonce() {
   let text = "";
@@ -44,4 +44,9 @@ export function getHtmlForWebview(
       <script nonce="${nonce}" src=${mainUri}></script>
     </body>
     </html>`;
+}
+
+export function getTheme() {
+  const config = workspace.getConfiguration("dineug.vuerd-vscode");
+  return Object.assign({}, config.get("theme"));
 }

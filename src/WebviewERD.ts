@@ -8,7 +8,7 @@ import {
   window,
   ViewColumn,
 } from "vscode";
-import { getHtmlForWebview } from "./util";
+import { getHtmlForWebview, getTheme } from "./util";
 import WebviewManager from "./WebviewManager";
 
 const viewType = "vuerd.webview";
@@ -69,6 +69,10 @@ export default class WebviewERD {
             return;
           case "getValue":
             try {
+              this.panel.webview.postMessage({
+                command: "theme",
+                value: getTheme(),
+              });
               const value = fs.readFileSync(this.uri.fsPath, "utf8");
               this.panel.webview.postMessage({
                 command: "value",
