@@ -71,6 +71,7 @@
 ## Document
 
 - [Live Demo](https://vuerd.github.io/vuerd/iframe.html?id=editor--load)
+- [Import SQL DDL support syntax](https://github.com/vuerd/vuerd/blob/master/data/SQL_DDL_Test_Case.md)
 
 ## Editor Keymap(default)
 
@@ -115,9 +116,9 @@
 - [x] Real-time simultaneous editing api
 - [x] SQL index Support [#9](https://github.com/vuerd/vuerd-vscode/issues/9)
 - SQL DDL import Support [#7](https://github.com/vuerd/vuerd-vscode/issues/7)
-  - [ ] Oracle
-  - [ ] MSSQL
-  - [ ] PostgreSQL
+  - [x] Oracle
+  - [x] MSSQL
+  - [x] PostgreSQL
 - [ ] SQL-Query generator [#3](https://github.com/vuerd/vuerd/issues/3)
 
 ## License
