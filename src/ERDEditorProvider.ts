@@ -4,7 +4,7 @@ import { Disposable, disposeAll } from "./dispose";
 import { trackEvent } from "./GoogleAnalytics";
 
 interface ERDEditorDocumentDelegate {
-  getFileData(): Promise<Uint8Array>;
+  getFileData(): Promise<string>;
 }
 
 class ERDEditorDocument extends Disposable implements vscode.CustomDocument {
@@ -15,19 +15,20 @@ class ERDEditorDocument extends Disposable implements vscode.CustomDocument {
   ): Promise<ERDEditorDocument | PromiseLike<ERDEditorDocument>> {
     const dataFile =
       typeof backupId === "string" ? vscode.Uri.parse(backupId) : uri;
-    const fileData = await vscode.workspace.fs.readFile(dataFile);
-    return new ERDEditorDocument(uri, fileData, delegate);
+    const buffer = await vscode.workspace.fs.readFile(dataFile);
+    const value = Buffer.from(buffer).toString("utf8");
+    return new ERDEditorDocument(uri, value, delegate);
   }
 
   private readonly _uri: vscode.Uri;
 
-  private _documentData: Uint8Array;
+  private _documentData: string;
 
   private readonly _delegate: ERDEditorDocumentDelegate;
 
   private constructor(
     uri: vscode.Uri,
-    initialContent: Uint8Array,
+    initialContent: string,
     delegate: ERDEditorDocumentDelegate
   ) {
     super();
@@ -40,7 +41,7 @@ class ERDEditorDocument extends Disposable implements vscode.CustomDocument {
     return this._uri;
   }
 
-  public get documentData(): Uint8Array {
+  public get documentData(): string {
     return this._documentData;
   }
 
@@ -52,7 +53,7 @@ class ERDEditorDocument extends Disposable implements vscode.CustomDocument {
 
   private readonly _onDidChangeDocument = this._register(
     new vscode.EventEmitter<{
-      readonly content: Uint8Array;
+      readonly content: string;
     }>()
   );
 
@@ -81,11 +82,11 @@ class ERDEditorDocument extends Disposable implements vscode.CustomDocument {
     targetResource: vscode.Uri,
     cancellation: vscode.CancellationToken
   ): Promise<void> {
-    const fileData = await this._delegate.getFileData();
+    const value = await this._delegate.getFileData();
     if (cancellation.isCancellationRequested) {
       return;
     }
-    const value = new TextDecoder("utf-8").decode(fileData);
+
     await vscode.workspace.fs.writeFile(
       targetResource,
       Buffer.from(JSON.stringify(JSON.parse(value), null, 2), "utf8")
@@ -93,10 +94,11 @@ class ERDEditorDocument extends Disposable implements vscode.CustomDocument {
   }
 
   async revert(_cancellation: vscode.CancellationToken): Promise<void> {
-    const diskContent = await vscode.workspace.fs.readFile(this.uri);
-    this._documentData = diskContent;
+    const buffer = await vscode.workspace.fs.readFile(this.uri);
+    const value = Buffer.from(buffer).toString("utf8");
+    this._documentData = value;
     this._onDidChangeDocument.fire({
-      content: diskContent,
+      content: value,
     });
   }
 
@@ -159,9 +161,9 @@ export class ERDEditorProvider
           }
           const panel = webviewsForDocument[0];
           const response = await this.postMessageWithResponse<{
-            data: number[];
+            value: string;
           }>(panel, "getFileData", {});
-          return new Uint8Array(response.data);
+          return response.value;
         },
       }
     );
@@ -180,7 +182,7 @@ export class ERDEditorProvider
       document.onDidChangeContent((e) => {
         for (const webviewPanel of this.webviews.get(document.uri)) {
           this.postMessage(webviewPanel, "update", {
-            content: e.content,
+            value: e.content,
           });
         }
       })

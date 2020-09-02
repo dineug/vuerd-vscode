@@ -69,30 +69,31 @@
 ```
 
 ##### Example settings.json configuration for a light themed editor
+
 ```json
 {
-   "dineug.vuerd-vscode.theme": {
-      "canvas": "#d7d7d7",
-      "table": "#e6e6e6",
-      "tableActive": "#ebb692",
-      "focus": "#ff5600",
-      "keyPK": "#B4B400",
-      "keyFK": "#dda8b1",
-      "keyPFK": "#60b9c4",
-      "font": "#5d5d5d",
-      "fontActive": "black",
-      "fontPlaceholder": "#929292",
-      "contextmenu": "#e6e6e6",
-      "contextmenuActive": "#c7c2be",
-      "edit": "#003ef8",
-      "columnSelect": "#dcd5d0",
-      "columnActive": "#c8d6f7",
-      "minimapShadow": "whote",
-      "scrollBarThumb": "#929292",
-      "scrollBarThumbActive": "#5d5d5d",
-      "menubar": "white",
-      "visualization": "#e6e6e6"
-   }
+  "dineug.vuerd-vscode.theme": {
+    "canvas": "#d7d7d7",
+    "table": "#e6e6e6",
+    "tableActive": "#ebb692",
+    "focus": "#ff5600",
+    "keyPK": "#B4B400",
+    "keyFK": "#dda8b1",
+    "keyPFK": "#60b9c4",
+    "font": "#5d5d5d",
+    "fontActive": "black",
+    "fontPlaceholder": "#929292",
+    "contextmenu": "#e6e6e6",
+    "contextmenuActive": "#c7c2be",
+    "edit": "#003ef8",
+    "columnSelect": "#dcd5d0",
+    "columnActive": "#c8d6f7",
+    "minimapShadow": "#5d5d5d",
+    "scrollBarThumb": "#929292",
+    "scrollBarThumbActive": "#5d5d5d",
+    "menubar": "white",
+    "visualization": "#d7d7d7"
+  }
 }
 ```
 

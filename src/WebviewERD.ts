@@ -1,5 +1,4 @@
 import * as path from "path";
-import * as fs from "fs";
 import {
   Disposable,
   WebviewPanel,
@@ -7,6 +6,7 @@ import {
   ExtensionContext,
   window,
   ViewColumn,
+  workspace,
 } from "vscode";
 import { getHtmlForWebview, getTheme } from "./util";
 import WebviewManager from "./WebviewManager";
@@ -51,36 +51,32 @@ export default class WebviewERD {
     this.panel.onDidDispose(() => this.dispose(), null, this.disposables);
     this.panel.webview.html = getHtmlForWebview(this.panel.webview, context);
     this.panel.webview.onDidReceiveMessage(
-      (message) => {
+      async (message) => {
         switch (message.command) {
           case "value":
-            fs.writeFile(
-              this.uri.fsPath,
+            await workspace.fs.writeFile(
+              this.uri,
               Buffer.from(
                 JSON.stringify(JSON.parse(message.value), null, 2),
                 "utf8"
-              ),
-              (err) => {
-                if (err) {
-                  window.showErrorMessage(err.message);
-                }
-              }
+              )
             );
             return;
           case "getValue":
             try {
+              const buffer = await workspace.fs.readFile(this.uri);
+              const value = Buffer.from(buffer).toString("utf8");
+              this.panel.webview.postMessage({
+                command: "state",
+                uri: this.uri,
+              });
               this.panel.webview.postMessage({
                 command: "theme",
                 value: getTheme(),
               });
-              const value = fs.readFileSync(this.uri.fsPath, "utf8");
               this.panel.webview.postMessage({
                 command: "value",
                 value,
-              });
-              this.panel.webview.postMessage({
-                command: "state",
-                uri: this.uri,
               });
             } catch (err) {
               window.showErrorMessage(err.message);
