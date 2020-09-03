@@ -1,0 +1,3 @@
+[submodule "vuerd"]
+	path = vuerd
+	url = https://github.com/vuerd/vuerd.git
