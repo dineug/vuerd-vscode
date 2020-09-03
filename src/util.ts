@@ -48,5 +48,9 @@ export function getHtmlForWebview(
 
 export function getTheme() {
   const config = workspace.getConfiguration("dineug.vuerd-vscode");
-  return Object.assign({}, config.get("theme"));
+  const themeSync = config.get("themeSync");
+  return {
+    theme: Object.assign({}, config.get("theme")),
+    themeSync: !!themeSync,
+  };
 }

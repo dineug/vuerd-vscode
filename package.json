@@ -1,6 +1,6 @@
 {
   "name": "vuerd-vscode",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "displayName": "ERD Editor",
   "description": "ERD Editor vscode extension",
   "main": "./out/extension.js",
@@ -105,6 +105,11 @@
     "configuration": {
       "title": "vuerd",
       "properties": {
+        "dineug.vuerd-vscode.themeSync": {
+          "description": "Synchronize the current vscode theme",
+          "type": "boolean",
+          "default": true
+        },
         "dineug.vuerd-vscode.theme": {
           "description": "Custom Theme",
           "type": "object",
