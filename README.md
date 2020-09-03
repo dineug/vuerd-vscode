@@ -57,6 +57,7 @@
 
 ```json
 {
+  "dineug.vuerd-vscode.themeSync": false,
   "dineug.vuerd-vscode.theme": {
     "canvas": "#d7d7d7",
     "table": "#e6e6e6",
