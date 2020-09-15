@@ -86,7 +86,7 @@
 ## Document
 
 - [Live Demo](https://vuerd.github.io/vuerd/iframe.html?id=editor--load)
-- [Import SQL DDL support syntax](https://github.com/vuerd/vuerd/blob/master/data/SQL_DDL_Test_Case.md)
+- [Import SQL DDL support syntax](https://github.com/dineug/sql-ddl-parser/blob/master/src/SQL_DDL_Test_Case.md)
 
 ## Editor Keymap(default)
 

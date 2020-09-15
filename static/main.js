@@ -33,6 +33,18 @@
   };
   let isInit = false;
 
+  vuerd.setExportFileCallback((blob, fileName) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      vscode.postMessage({
+        command: "exportFile",
+        value: reader.result,
+        fileName,
+      });
+    };
+    reader.readAsDataURL(blob);
+  });
+
   window.addEventListener("resize", () => {
     editor.width = window.innerWidth;
     editor.height = window.innerHeight;

@@ -1,4 +1,5 @@
 import * as path from "path";
+import * as os from "os";
 import {
   Disposable,
   WebviewPanel,
@@ -82,6 +83,20 @@ export default class WebviewERD {
               window.showErrorMessage(err.message);
             }
             return;
+          case "exportFile":
+            window
+              .showSaveDialog({
+                defaultUri: Uri.file(path.join(os.homedir(), message.fileName)),
+              })
+              .then((uri) => {
+                if (uri) {
+                  workspace.fs.writeFile(
+                    uri,
+                    Buffer.from(message.value.split(",")[1], "base64")
+                  );
+                }
+              });
+            break;
         }
       },
       null,

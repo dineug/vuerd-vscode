@@ -1,3 +1,5 @@
+import * as path from "path";
+import * as os from "os";
 import * as vscode from "vscode";
 import { getHtmlForWebview, getTheme } from "./util";
 import { Disposable, disposeAll } from "./dispose";
@@ -220,6 +222,19 @@ export class ERDEditorProvider
         this.postMessage(webviewPanel, "init", {
           value: document.documentData,
         });
+      } else if (e.command === "exportFile") {
+        vscode.window
+          .showSaveDialog({
+            defaultUri: vscode.Uri.file(path.join(os.homedir(), e.fileName)),
+          })
+          .then((uri) => {
+            if (uri) {
+              vscode.workspace.fs.writeFile(
+                uri,
+                Buffer.from(e.value.split(",")[1], "base64")
+              );
+            }
+          });
       }
     });
   }
