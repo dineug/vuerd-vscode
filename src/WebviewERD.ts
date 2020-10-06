@@ -9,7 +9,7 @@ import {
   ViewColumn,
   workspace,
 } from "vscode";
-import { getHtmlForWebview, getTheme } from "./util";
+import { getHtmlForWebview, getTheme, getKeymap } from "./util";
 import WebviewManager from "./WebviewManager";
 
 const viewType = "vuerd.webview";
@@ -74,6 +74,10 @@ export default class WebviewERD {
               this.panel.webview.postMessage({
                 command: "theme",
                 value: getTheme(),
+              });
+              this.panel.webview.postMessage({
+                command: "keymap",
+                value: getKeymap(),
               });
               this.panel.webview.postMessage({
                 command: "value",

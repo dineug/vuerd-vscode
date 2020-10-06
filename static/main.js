@@ -75,6 +75,9 @@
             editor.setTheme(message.value.theme);
           }
           break;
+        case "keymap":
+          editor.setKeymap(message.value.keymap);
+          break;
       }
     } else if (message.type) {
       // custom editor API
@@ -107,6 +110,8 @@
         } else {
           editor.setTheme(body.value.theme);
         }
+      } else if (type === "keymap") {
+        editor.setKeymap(body.value.keymap);
       }
     }
   });

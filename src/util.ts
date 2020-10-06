@@ -54,3 +54,10 @@ export function getTheme() {
     themeSync: !!themeSync,
   };
 }
+
+export function getKeymap() {
+  const config = workspace.getConfiguration("dineug.vuerd-vscode");
+  return {
+    keymap: Object.assign({}, config.get("keymap")),
+  };
+}

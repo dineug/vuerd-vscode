@@ -1,7 +1,7 @@
 import * as path from "path";
 import * as os from "os";
 import * as vscode from "vscode";
-import { getHtmlForWebview, getTheme } from "./util";
+import { getHtmlForWebview, getTheme, getKeymap } from "./util";
 import { Disposable, disposeAll } from "./dispose";
 import { trackEvent } from "./GoogleAnalytics";
 
@@ -218,6 +218,9 @@ export class ERDEditorProvider
       if (e.command === "getValue") {
         this.postMessage(webviewPanel, "theme", {
           value: getTheme(),
+        });
+        this.postMessage(webviewPanel, "keymap", {
+          value: getKeymap(),
         });
         this.postMessage(webviewPanel, "init", {
           value: document.documentData,

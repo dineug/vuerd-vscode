@@ -83,6 +83,48 @@
 }
 ```
 
+## Keymap settings.json
+
+```json
+{
+  "dineug.vuerd-vscode.keymap": {
+    "find": [
+      {
+        "metaKey": false,
+        "ctrlKey": true,
+        "altKey": true,
+        "shiftKey": false,
+        "key": "F"
+      }
+    ],
+    "selectAllColumn": [] // remove keymap
+    // edit
+    // stop
+    // find
+    // undo
+    // redo
+    // addTable
+    // addColumn
+    // addMemo
+    // removeTable
+    // removeColumn
+    // primaryKey
+    // selectAllTable
+    // selectAllColumn
+    // copyColumn
+    // pasteColumn
+    // relationshipZeroOneN
+    // relationshipZeroOne
+    // relationshipZeroN
+    // relationshipOneOnly
+    // relationshipOneN
+    // relationshipOne
+    // relationshipN
+    // tableProperties
+  }
+}
+```
+
 ## Document
 
 - [Live Demo](https://vuerd.github.io/vuerd/iframe.html?id=demo--live&viewMode=story)
