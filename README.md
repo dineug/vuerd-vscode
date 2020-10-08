@@ -94,7 +94,7 @@
         "ctrlKey": true,
         "altKey": true,
         "shiftKey": false,
-        "key": "F"
+        "key": "KeyF"
       }
     ],
     "selectAllColumn": [] // remove keymap
