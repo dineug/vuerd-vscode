@@ -1,6 +1,6 @@
 {
   "name": "vuerd-vscode",
-  "version": "0.7.7",
+  "version": "0.7.8",
   "displayName": "ERD Editor",
   "description": "ERD Editor vscode extension",
   "main": "./out/extension.js",
@@ -20,7 +20,7 @@
     "database",
     "diagram"
   ],
-  "homepage": "https://github.com/vuerd/vuerd-vscode",
+  "homepage": "https://github.com/vuerd/vuerd-vscode#readme",
   "bugs": {
     "url": "https://github.com/vuerd/vuerd-vscode/issues"
   },
