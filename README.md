@@ -115,10 +115,7 @@
 | Primary Key                                                | Alt + K                                                                                  |
 | checkbox - Grid, filter                                    | Space, Click                                                                             |
 | Move checkbox - Grid, filter                               | Arrow key(up, down, left, right)                                                         |
-| Relationship - Zero One N                                  | Ctrl + Alt + 1, Cmd + Alt + 1                                                            |
-| Relationship - Zero One                                    | Ctrl + Alt + 2, Cmd + Alt + 2                                                            |
-| Relationship - Zero N                                      | Ctrl + Alt + 3, Cmd + Alt + 3                                                            |
-| Relationship - One Only                                    | Ctrl + Alt + 4, Cmd + Alt + 4                                                            |
-| Relationship - One N                                       | Ctrl + Alt + 5, Cmd + Alt + 5                                                            |
-| Relationship - One                                         | Ctrl + Alt + 6, Cmd + Alt + 6                                                            |
-| Relationship - N                                           | Ctrl + Alt + 7, Cmd + Alt + 7                                                            |
+| Relationship - Zero One                                    | Ctrl + Alt + 1, Cmd + Alt + 1                                                            |
+| Relationship - Zero N                                      | Ctrl + Alt + 2, Cmd + Alt + 2                                                            |
+| Relationship - One Only                                    | Ctrl + Alt + 3, Cmd + Alt + 3                                                            |
+| Relationship - One N                                       | Ctrl + Alt + 4, Cmd + Alt + 4                                                            |
