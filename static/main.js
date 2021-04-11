@@ -24,8 +24,8 @@
     columnSelect: getTheme("list.activeSelectionBackground"),
     columnActive: getTheme("list.hoverBackground"),
     minimapShadow: getTheme("widget.shadow"),
-    scrollBarThumb: getTheme("scrollbarSlider.background"),
-    scrollBarThumbActive: getTheme("scrollbarSlider.hoverBackground"),
+    scrollbarThumb: getTheme("scrollbarSlider.background"),
+    scrollbarThumbActive: getTheme("scrollbarSlider.hoverBackground"),
     menubar: getTheme("activityBar.background"),
     visualization: getTheme("editor.background"),
   };
