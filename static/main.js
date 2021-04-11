@@ -1,12 +1,10 @@
 (function () {
-  function getTheme(name) {
-    return getComputedStyle(document.documentElement).getPropertyValue(
+  const getTheme = (name) =>
+    getComputedStyle(document.documentElement).getPropertyValue(
       `--vscode-${name.replace(".", "-")}`
     );
-  }
 
-  document.body.style = `padding: 0; margin: 0;`;
-  const container = document.querySelector("#app");
+  document.body.style = `padding: 0; margin: 0; width: 100%; height:100vh;`;
   const editor = document.createElement("erd-editor");
   const vscode = acquireVsCodeApi();
   const vscodeTheme = {
@@ -45,11 +43,8 @@
     reader.readAsDataURL(blob);
   });
 
-  window.addEventListener("resize", () => {
-    editor.width = window.innerWidth;
-    editor.height = window.innerHeight;
-  });
-  window.dispatchEvent(new Event("resize"));
+  editor.automaticLayout = true;
+
   window.addEventListener("message", (event) => {
     const message = event.data;
     if (message.command) {
@@ -63,7 +58,7 @@
             });
           });
           editor.initLoadJson(message.value);
-          container.appendChild(editor);
+          document.body.appendChild(editor);
           break;
         case "state":
           vscode.setState({ uri: message.uri });
@@ -90,7 +85,7 @@
           });
         });
         editor.initLoadJson(body.value);
-        container.appendChild(editor);
+        document.body.appendChild(editor);
         isInit = true;
       } else if (type === "update") {
         editor.value = body.value;

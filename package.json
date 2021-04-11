@@ -1,6 +1,6 @@
 {
   "name": "vuerd-vscode",
-  "version": "0.7.8",
+  "version": "0.7.9",
   "displayName": "ERD Editor",
   "description": "ERD Editor vscode extension",
   "main": "./out/extension.js",
@@ -30,6 +30,30 @@
   },
   "author": "dineug <dineug2@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "rollup -c",
+    "lint": "eslint . --ext .ts"
+  },
+  "devDependencies": {
+    "@dineug/vscode-google-analytics": "^0.1.2",
+    "@rollup/plugin-commonjs": "^15.0.0",
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "@rollup/plugin-typescript": "^6.0.0",
+    "@types/node": "^14.11.1",
+    "@types/vscode": "^1.47.0",
+    "@typescript-eslint/eslint-plugin": "^4.1.1",
+    "@typescript-eslint/parser": "^4.1.1",
+    "eslint": "^7.9.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "macaddress": "^0.5.1",
+    "prettier": "^2.1.2",
+    "rollup": "^2.27.1",
+    "rollup-plugin-eslint": "^7.0.0",
+    "typescript": "^4.0.3"
+  },
+  "dependencies": {},
   "engines": {
     "vscode": "^1.47.0"
   },
@@ -108,7 +132,7 @@
         "dineug.vuerd-vscode.themeSync": {
           "description": "Synchronize the current vscode theme",
           "type": "boolean",
-          "default": true
+          "default": false
         },
         "dineug.vuerd-vscode.theme": {
           "description": "Custom Theme",
@@ -194,12 +218,12 @@
               "type": "string",
               "default": "black"
             },
-            "scrollBarThumb": {
+            "scrollbarThumb": {
               "description": "thumb color",
               "type": "string",
               "default": "#6d6d6d"
             },
-            "scrollBarThumbActive": {
+            "scrollbarThumbActive": {
               "description": "active color",
               "type": "string",
               "default": "#a2a2a2"
@@ -249,15 +273,21 @@
                   "key": {
                     "description": "Key\nhttps://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent/key/Key_Values\nhttps://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values",
                     "type": "string"
+                  },
+                  "preventDefault": {
+                    "description": "preventDefault\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "stopPropagation": {
+                    "description": "stopPropagation\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation",
+                    "type": "boolean",
+                    "default": false
                   }
                 }
               },
               "default": [
                 {
-                  "metaKey": false,
-                  "ctrlKey": false,
-                  "altKey": false,
-                  "shiftKey": false,
                   "key": "Enter"
                 }
               ]
@@ -291,15 +321,21 @@
                   "key": {
                     "description": "Key\nhttps://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent/key/Key_Values\nhttps://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values",
                     "type": "string"
+                  },
+                  "preventDefault": {
+                    "description": "preventDefault\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "stopPropagation": {
+                    "description": "stopPropagation\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation",
+                    "type": "boolean",
+                    "default": false
                   }
                 }
               },
               "default": [
                 {
-                  "metaKey": false,
-                  "ctrlKey": false,
-                  "altKey": false,
-                  "shiftKey": false,
                   "key": "Escape"
                 }
               ]
@@ -333,16 +369,30 @@
                   "key": {
                     "description": "Key\nhttps://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent/key/Key_Values\nhttps://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values",
                     "type": "string"
+                  },
+                  "preventDefault": {
+                    "description": "preventDefault\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "stopPropagation": {
+                    "description": "stopPropagation\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation",
+                    "type": "boolean",
+                    "default": false
                   }
                 }
               },
               "default": [
                 {
-                  "metaKey": false,
+                  "altKey": true,
+                  "key": "F",
+                  "preventDefault": true
+                },
+                {
                   "ctrlKey": true,
                   "altKey": true,
-                  "shiftKey": false,
-                  "key": "F"
+                  "key": "F",
+                  "preventDefault": true
                 }
               ]
             },
@@ -375,16 +425,29 @@
                   "key": {
                     "description": "Key\nhttps://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent/key/Key_Values\nhttps://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values",
                     "type": "string"
+                  },
+                  "preventDefault": {
+                    "description": "preventDefault\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "stopPropagation": {
+                    "description": "stopPropagation\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation",
+                    "type": "boolean",
+                    "default": false
                   }
                 }
               },
               "default": [
                 {
-                  "metaKey": false,
                   "ctrlKey": true,
-                  "altKey": false,
-                  "shiftKey": false,
-                  "key": "Z"
+                  "key": "Z",
+                  "preventDefault": true
+                },
+                {
+                  "metaKey": true,
+                  "key": "Z",
+                  "preventDefault": true
                 }
               ]
             },
@@ -417,16 +480,31 @@
                   "key": {
                     "description": "Key\nhttps://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent/key/Key_Values\nhttps://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values",
                     "type": "string"
+                  },
+                  "preventDefault": {
+                    "description": "preventDefault\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "stopPropagation": {
+                    "description": "stopPropagation\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation",
+                    "type": "boolean",
+                    "default": false
                   }
                 }
               },
               "default": [
                 {
-                  "metaKey": false,
                   "ctrlKey": true,
-                  "altKey": false,
                   "shiftKey": true,
-                  "key": "Z"
+                  "key": "Z",
+                  "preventDefault": true
+                },
+                {
+                  "metaKey": true,
+                  "shiftKey": true,
+                  "key": "Z",
+                  "preventDefault": true
                 }
               ]
             },
@@ -459,15 +537,22 @@
                   "key": {
                     "description": "Key\nhttps://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent/key/Key_Values\nhttps://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values",
                     "type": "string"
+                  },
+                  "preventDefault": {
+                    "description": "preventDefault\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "stopPropagation": {
+                    "description": "stopPropagation\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation",
+                    "type": "boolean",
+                    "default": false
                   }
                 }
               },
               "default": [
                 {
-                  "metaKey": false,
-                  "ctrlKey": false,
                   "altKey": true,
-                  "shiftKey": false,
                   "key": "N"
                 }
               ]
@@ -501,15 +586,22 @@
                   "key": {
                     "description": "Key\nhttps://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent/key/Key_Values\nhttps://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values",
                     "type": "string"
+                  },
+                  "preventDefault": {
+                    "description": "preventDefault\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "stopPropagation": {
+                    "description": "stopPropagation\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation",
+                    "type": "boolean",
+                    "default": false
                   }
                 }
               },
               "default": [
                 {
-                  "metaKey": false,
-                  "ctrlKey": false,
                   "altKey": true,
-                  "shiftKey": false,
                   "key": "Enter"
                 }
               ]
@@ -543,21 +635,28 @@
                   "key": {
                     "description": "Key\nhttps://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent/key/Key_Values\nhttps://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values",
                     "type": "string"
+                  },
+                  "preventDefault": {
+                    "description": "preventDefault\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "stopPropagation": {
+                    "description": "stopPropagation\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation",
+                    "type": "boolean",
+                    "default": false
                   }
                 }
               },
               "default": [
                 {
-                  "metaKey": false,
-                  "ctrlKey": false,
                   "altKey": true,
-                  "shiftKey": false,
                   "key": "M"
                 }
               ]
             },
             "removeTable": {
-              "description": "ERD Remove Memo",
+              "description": "ERD Remove Table",
               "type": "array",
               "items": {
                 "type": "object",
@@ -585,16 +684,35 @@
                   "key": {
                     "description": "Key\nhttps://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent/key/Key_Values\nhttps://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values",
                     "type": "string"
+                  },
+                  "preventDefault": {
+                    "description": "preventDefault\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "stopPropagation": {
+                    "description": "stopPropagation\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation",
+                    "type": "boolean",
+                    "default": false
                   }
                 }
               },
               "default": [
                 {
-                  "metaKey": false,
                   "ctrlKey": true,
-                  "altKey": false,
-                  "shiftKey": false,
                   "key": "Delete"
+                },
+                {
+                  "ctrlKey": true,
+                  "key": "Backspace"
+                },
+                {
+                  "metaKey": true,
+                  "key": "Delete"
+                },
+                {
+                  "metaKey": true,
+                  "key": "Backspace"
                 }
               ]
             },
@@ -627,16 +745,27 @@
                   "key": {
                     "description": "Key\nhttps://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent/key/Key_Values\nhttps://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values",
                     "type": "string"
+                  },
+                  "preventDefault": {
+                    "description": "preventDefault\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "stopPropagation": {
+                    "description": "stopPropagation\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation",
+                    "type": "boolean",
+                    "default": false
                   }
                 }
               },
               "default": [
                 {
-                  "metaKey": false,
-                  "ctrlKey": false,
                   "altKey": true,
-                  "shiftKey": false,
                   "key": "Delete"
+                },
+                {
+                  "altKey": true,
+                  "key": "Backspace"
                 }
               ]
             },
@@ -669,15 +798,22 @@
                   "key": {
                     "description": "Key\nhttps://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent/key/Key_Values\nhttps://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values",
                     "type": "string"
+                  },
+                  "preventDefault": {
+                    "description": "preventDefault\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "stopPropagation": {
+                    "description": "stopPropagation\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation",
+                    "type": "boolean",
+                    "default": false
                   }
                 }
               },
               "default": [
                 {
-                  "metaKey": false,
-                  "ctrlKey": false,
                   "altKey": true,
-                  "shiftKey": false,
                   "key": "K"
                 }
               ]
@@ -711,15 +847,28 @@
                   "key": {
                     "description": "Key\nhttps://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent/key/Key_Values\nhttps://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values",
                     "type": "string"
+                  },
+                  "preventDefault": {
+                    "description": "preventDefault\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "stopPropagation": {
+                    "description": "stopPropagation\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation",
+                    "type": "boolean",
+                    "default": false
                   }
                 }
               },
               "default": [
                 {
-                  "metaKey": false,
                   "ctrlKey": true,
                   "altKey": true,
-                  "shiftKey": false,
+                  "key": "A"
+                },
+                {
+                  "metaKey": true,
+                  "altKey": true,
                   "key": "A"
                 }
               ]
@@ -753,15 +902,22 @@
                   "key": {
                     "description": "Key\nhttps://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent/key/Key_Values\nhttps://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values",
                     "type": "string"
+                  },
+                  "preventDefault": {
+                    "description": "preventDefault\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "stopPropagation": {
+                    "description": "stopPropagation\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation",
+                    "type": "boolean",
+                    "default": false
                   }
                 }
               },
               "default": [
                 {
-                  "metaKey": false,
-                  "ctrlKey": false,
                   "altKey": true,
-                  "shiftKey": false,
                   "key": "A"
                 }
               ]
@@ -795,15 +951,26 @@
                   "key": {
                     "description": "Key\nhttps://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent/key/Key_Values\nhttps://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values",
                     "type": "string"
+                  },
+                  "preventDefault": {
+                    "description": "preventDefault\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "stopPropagation": {
+                    "description": "stopPropagation\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation",
+                    "type": "boolean",
+                    "default": false
                   }
                 }
               },
               "default": [
                 {
-                  "metaKey": false,
                   "ctrlKey": true,
-                  "altKey": false,
-                  "shiftKey": false,
+                  "key": "C"
+                },
+                {
+                  "metaKey": true,
                   "key": "C"
                 }
               ]
@@ -837,15 +1004,26 @@
                   "key": {
                     "description": "Key\nhttps://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent/key/Key_Values\nhttps://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values",
                     "type": "string"
+                  },
+                  "preventDefault": {
+                    "description": "preventDefault\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "stopPropagation": {
+                    "description": "stopPropagation\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation",
+                    "type": "boolean",
+                    "default": false
                   }
                 }
               },
               "default": [
                 {
-                  "metaKey": false,
                   "ctrlKey": true,
-                  "altKey": false,
-                  "shiftKey": false,
+                  "key": "V"
+                },
+                {
+                  "metaKey": true,
                   "key": "V"
                 }
               ]
@@ -879,15 +1057,28 @@
                   "key": {
                     "description": "Key\nhttps://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent/key/Key_Values\nhttps://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values",
                     "type": "string"
+                  },
+                  "preventDefault": {
+                    "description": "preventDefault\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "stopPropagation": {
+                    "description": "stopPropagation\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation",
+                    "type": "boolean",
+                    "default": false
                   }
                 }
               },
               "default": [
                 {
-                  "metaKey": false,
                   "ctrlKey": true,
                   "altKey": true,
-                  "shiftKey": false,
+                  "key": "1"
+                },
+                {
+                  "metaKey": true,
+                  "altKey": true,
                   "key": "1"
                 }
               ]
@@ -921,15 +1112,28 @@
                   "key": {
                     "description": "Key\nhttps://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent/key/Key_Values\nhttps://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values",
                     "type": "string"
+                  },
+                  "preventDefault": {
+                    "description": "preventDefault\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "stopPropagation": {
+                    "description": "stopPropagation\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation",
+                    "type": "boolean",
+                    "default": false
                   }
                 }
               },
               "default": [
                 {
-                  "metaKey": false,
                   "ctrlKey": true,
                   "altKey": true,
-                  "shiftKey": false,
+                  "key": "2"
+                },
+                {
+                  "metaKey": true,
+                  "altKey": true,
                   "key": "2"
                 }
               ]
@@ -963,15 +1167,28 @@
                   "key": {
                     "description": "Key\nhttps://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent/key/Key_Values\nhttps://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values",
                     "type": "string"
+                  },
+                  "preventDefault": {
+                    "description": "preventDefault\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "stopPropagation": {
+                    "description": "stopPropagation\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation",
+                    "type": "boolean",
+                    "default": false
                   }
                 }
               },
               "default": [
                 {
-                  "metaKey": false,
                   "ctrlKey": true,
                   "altKey": true,
-                  "shiftKey": false,
+                  "key": "3"
+                },
+                {
+                  "metaKey": true,
+                  "altKey": true,
                   "key": "3"
                 }
               ]
@@ -1005,15 +1222,28 @@
                   "key": {
                     "description": "Key\nhttps://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent/key/Key_Values\nhttps://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values",
                     "type": "string"
+                  },
+                  "preventDefault": {
+                    "description": "preventDefault\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "stopPropagation": {
+                    "description": "stopPropagation\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation",
+                    "type": "boolean",
+                    "default": false
                   }
                 }
               },
               "default": [
                 {
-                  "metaKey": false,
                   "ctrlKey": true,
                   "altKey": true,
-                  "shiftKey": false,
+                  "key": "4"
+                },
+                {
+                  "metaKey": true,
+                  "altKey": true,
                   "key": "4"
                 }
               ]
@@ -1047,15 +1277,28 @@
                   "key": {
                     "description": "Key\nhttps://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent/key/Key_Values\nhttps://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values",
                     "type": "string"
+                  },
+                  "preventDefault": {
+                    "description": "preventDefault\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "stopPropagation": {
+                    "description": "stopPropagation\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation",
+                    "type": "boolean",
+                    "default": false
                   }
                 }
               },
               "default": [
                 {
-                  "metaKey": false,
                   "ctrlKey": true,
                   "altKey": true,
-                  "shiftKey": false,
+                  "key": "5"
+                },
+                {
+                  "metaKey": true,
+                  "altKey": true,
                   "key": "5"
                 }
               ]
@@ -1089,15 +1332,28 @@
                   "key": {
                     "description": "Key\nhttps://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent/key/Key_Values\nhttps://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values",
                     "type": "string"
+                  },
+                  "preventDefault": {
+                    "description": "preventDefault\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "stopPropagation": {
+                    "description": "stopPropagation\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation",
+                    "type": "boolean",
+                    "default": false
                   }
                 }
               },
               "default": [
                 {
-                  "metaKey": false,
                   "ctrlKey": true,
                   "altKey": true,
-                  "shiftKey": false,
+                  "key": "6"
+                },
+                {
+                  "metaKey": true,
+                  "altKey": true,
                   "key": "6"
                 }
               ]
@@ -1131,15 +1387,28 @@
                   "key": {
                     "description": "Key\nhttps://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent/key/Key_Values\nhttps://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values",
                     "type": "string"
+                  },
+                  "preventDefault": {
+                    "description": "preventDefault\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "stopPropagation": {
+                    "description": "stopPropagation\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation",
+                    "type": "boolean",
+                    "default": false
                   }
                 }
               },
               "default": [
                 {
-                  "metaKey": false,
                   "ctrlKey": true,
                   "altKey": true,
-                  "shiftKey": false,
+                  "key": "7"
+                },
+                {
+                  "metaKey": true,
+                  "altKey": true,
                   "key": "7"
                 }
               ]
@@ -1173,15 +1442,26 @@
                   "key": {
                     "description": "Key\nhttps://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent/key/Key_Values\nhttps://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values",
                     "type": "string"
+                  },
+                  "preventDefault": {
+                    "description": "preventDefault\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "stopPropagation": {
+                    "description": "stopPropagation\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation",
+                    "type": "boolean",
+                    "default": false
                   }
                 }
               },
               "default": [
                 {
-                  "metaKey": false,
+                  "altKey": true,
+                  "key": "Space"
+                },
+                {
                   "ctrlKey": true,
-                  "altKey": false,
-                  "shiftKey": false,
                   "key": "Space"
                 }
               ]
@@ -1190,29 +1470,5 @@
         }
       }
     }
-  },
-  "scripts": {
-    "vscode:prepublish": "npm run build",
-    "build": "rollup -c",
-    "lint": "eslint . --ext .ts"
-  },
-  "devDependencies": {
-    "@dineug/vscode-google-analytics": "^0.1.2",
-    "@rollup/plugin-commonjs": "^15.0.0",
-    "@rollup/plugin-node-resolve": "^9.0.0",
-    "@rollup/plugin-typescript": "^6.0.0",
-    "@types/node": "^14.11.1",
-    "@types/vscode": "^1.47.0",
-    "@typescript-eslint/eslint-plugin": "^4.1.1",
-    "@typescript-eslint/parser": "^4.1.1",
-    "eslint": "^7.9.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-prettier": "^3.1.4",
-    "macaddress": "^0.5.1",
-    "prettier": "^2.1.2",
-    "rollup": "^2.27.1",
-    "rollup-plugin-eslint": "^7.0.0",
-    "typescript": "^4.0.3"
-  },
-  "dependencies": {}
+  }
 }

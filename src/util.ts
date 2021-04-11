@@ -39,7 +39,6 @@ export function getHtmlForWebview(
       <title>vuerd</title>
     </head>
     <body>
-      <div id="app"></div>
       <script nonce="${nonce}" src=${vuerdUri}></script>
       <script nonce="${nonce}" src=${mainUri}></script>
     </body>
