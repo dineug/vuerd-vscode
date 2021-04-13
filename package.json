@@ -1,6 +1,6 @@
 {
   "name": "vuerd-vscode",
-  "version": "0.7.11",
+  "version": "0.7.12",
   "displayName": "ERD Editor",
   "description": "ERD Editor vscode extension",
   "main": "./out/extension.js",
@@ -1298,6 +1298,114 @@
                 {
                   "ctrlKey": true,
                   "key": "Space"
+                }
+              ]
+            },
+            "zoomIn": {
+              "description": "ERD Zoom In",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "metaKey": {
+                    "description": "window, command Key",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "ctrlKey": {
+                    "description": "control Key",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "altKey": {
+                    "description": "alt, option Key",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "shiftKey": {
+                    "description": "shift Key",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "key": {
+                    "description": "Key\nhttps://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent/key/Key_Values\nhttps://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values",
+                    "type": "string"
+                  },
+                  "preventDefault": {
+                    "description": "preventDefault\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "stopPropagation": {
+                    "description": "stopPropagation\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation",
+                    "type": "boolean",
+                    "default": false
+                  }
+                }
+              },
+              "default": [
+                {
+                  "shiftKey": true,
+                  "key": "Equal"
+                },
+                {
+                  "ctrlKey": true,
+                  "key": "Equal",
+                  "preventDefault": true
+                }
+              ]
+            },
+            "zoomOut": {
+              "description": "ERD Zoom Out",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "metaKey": {
+                    "description": "window, command Key",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "ctrlKey": {
+                    "description": "control Key",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "altKey": {
+                    "description": "alt, option Key",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "shiftKey": {
+                    "description": "shift Key",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "key": {
+                    "description": "Key\nhttps://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent/key/Key_Values\nhttps://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values",
+                    "type": "string"
+                  },
+                  "preventDefault": {
+                    "description": "preventDefault\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "stopPropagation": {
+                    "description": "stopPropagation\nhttps://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation",
+                    "type": "boolean",
+                    "default": false
+                  }
+                }
+              },
+              "default": [
+                {
+                  "shiftKey": true,
+                  "key": "Minus"
+                },
+                {
+                  "ctrlKey": true,
+                  "key": "Minus",
+                  "preventDefault": true
                 }
               ]
             }

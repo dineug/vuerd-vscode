@@ -87,6 +87,7 @@
 ## Document
 
 - [Import SQL DDL support syntax](https://github.com/dineug/sql-ddl-parser/blob/master/src/SQL_DDL_Test_Case.md)
+- [Live Demo](https://vuerd.github.io/vuerd/iframe.html?id=example-demo--erd-editor&args=&viewMode=story)
 
 ## Editor Keymap(default)
 
@@ -119,3 +120,5 @@
 | Relationship - Zero N                                      | Ctrl + Alt + 2, Cmd + Alt + 2                                                            |
 | Relationship - One Only                                    | Ctrl + Alt + 3, Cmd + Alt + 3                                                            |
 | Relationship - One N                                       | Ctrl + Alt + 4, Cmd + Alt + 4                                                            |
+| Zoom In - ERD                                              | Shift + Equal, Ctrl + Equal                                                              |
+| Zoom Out - ERD                                             | Shift + Minus, Ctrl + Minus                                                              |
