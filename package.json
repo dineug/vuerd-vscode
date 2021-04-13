@@ -1,6 +1,6 @@
 {
   "name": "vuerd-vscode",
-  "version": "0.7.12",
+  "version": "0.7.13",
   "displayName": "ERD Editor",
   "description": "ERD Editor vscode extension",
   "main": "./out/extension.js",
@@ -1345,13 +1345,16 @@
               },
               "default": [
                 {
-                  "shiftKey": true,
-                  "key": "Equal"
-                },
-                {
                   "ctrlKey": true,
                   "key": "Equal",
-                  "preventDefault": true
+                  "preventDefault": true,
+                  "stopPropagation": true
+                },
+                {
+                  "metaKey": true,
+                  "key": "Equal",
+                  "preventDefault": true,
+                  "stopPropagation": true
                 }
               ]
             },
@@ -1399,13 +1402,16 @@
               },
               "default": [
                 {
-                  "shiftKey": true,
-                  "key": "Minus"
-                },
-                {
                   "ctrlKey": true,
                   "key": "Minus",
-                  "preventDefault": true
+                  "preventDefault": true,
+                  "stopPropagation": true
+                },
+                {
+                  "metaKey": true,
+                  "key": "Minus",
+                  "preventDefault": true,
+                  "stopPropagation": true
                 }
               ]
             }
