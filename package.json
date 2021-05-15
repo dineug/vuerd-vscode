@@ -1,6 +1,6 @@
 {
   "name": "vuerd-vscode",
-  "version": "0.7.21",
+  "version": "0.7.22",
   "displayName": "ERD Editor",
   "description": "ERD Editor vscode extension",
   "main": "./out/extension.js",
@@ -63,6 +63,11 @@
     "onCustomEditor:vuerd.editor"
   ],
   "contributes": {
+    "capabilities": {
+      "untrustedWorkspaces": {
+        "supported": true
+      }
+    },
     "customEditors": [
       {
         "viewType": "vuerd.editor",
