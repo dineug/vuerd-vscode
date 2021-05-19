@@ -1,3 +1,7 @@
+# Moved
+
+This module has [moved](https://github.com/vuerd/vuerd/tree/master/packages/vuerd-vscode). This repository is no longer maintained.
+
 # vuerd-vscode
 
 > [vuerd](https://github.com/vuerd/vuerd) ERD Editor vscode extension
